@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systems Breakdown — RFP Analysis Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .rfp-cite {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 11px;
+      color: #22d3ee;
+      cursor: help;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .rfp-cite .cite-icon { font-size: 9px; opacity: 0.8; }
+    #rfp-tooltip { display: none; }
+    .tab-btn.active { background: #2563eb; color: #fff; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .req-row:hover { background: #f8fafc; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    }
+    .accordion-chevron { transition: transform 0.2s ease; }
+    .accordion-chevron.open { transform: rotate(90deg); }
+    .accordion-body { display: none; }
+    .accordion-body.open { display: block; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+  <div id="nav-container"></div>
+
+  <main class="ml-60 min-h-screen">
+    <!-- Page header -->
+    <div class="bg-white border-b border-slate-200 px-8 py-6">
+      <div class="text-xs text-slate-400 font-semibold uppercase tracking-widest mb-1">RFP/2026/61570 · Bundle 2</div>
+      <h1 class="text-2xl font-bold text-slate-900">Systems Breakdown</h1>
+      <p class="text-slate-500 text-sm mt-1">Detailed functional and non-functional requirements for each of the 5 core systems</p>
+    </div>
+
+    <div class="px-8 py-6">
+
+      <!-- MVP scope disclaimer -->
+      <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 flex items-start gap-2.5">
+        <span class="text-amber-500 text-base flex-shrink-0 mt-0.5">⚠️</span>
+        <p class="text-xs text-amber-800 leading-relaxed">
+          <strong>Note on requirement-level MVP tags:</strong> The scoping in the accordion below represents Allion Tech's recommended MVP scope for the Inception Report proposal — not something mandated by the RFP. The RFP intentionally leaves individual requirement prioritization to the vendor.
+        </p>
+      </div>
+
+      <!-- Tab bar -->
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden mb-6 shadow-sm">
+        <div class="flex border-b border-slate-200 overflow-x-auto" id="tab-bar">
+          <button class="tab-btn active flex items-center gap-2 px-5 py-3.5 text-sm font-semibold whitespace-nowrap transition-colors" data-tab="nehr">
+            <span class="w-2 h-2 rounded-full bg-blue-500 inline-block"></span> NEHR
+          </button>
+          <button class="tab-btn flex items-center gap-2 px-5 py-3.5 text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-50 transition-colors" data-tab="nhdx">
+            <span class="w-2 h-2 rounded-full bg-indigo-500 inline-block"></span> NHDX
+          </button>
+          <button class="tab-btn flex items-center gap-2 px-5 py-3.5 text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-50 transition-colors" data-tab="idp">
+            <span class="w-2 h-2 rounded-full bg-violet-500 inline-block"></span> Identity Provider
+          </button>
+          <button class="tab-btn flex items-center gap-2 px-5 py-3.5 text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-50 transition-colors" data-tab="terminology">
+            <span class="w-2 h-2 rounded-full bg-teal-500 inline-block"></span> Terminology Services
+          </button>
+          <button class="tab-btn flex items-center gap-2 px-5 py-3.5 text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-50 transition-colors" data-tab="ereferral">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> e-Referral
+          </button>
+        </div>
+
+        <!-- ── TAB 1: NEHR ──────────────────────────────────────────────────── -->
+        <div class="tab-panel active p-6" id="tab-nehr">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 1 of 5</span>
+                <span class="rfp-cite" data-cite="nehr_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
+              </div>
+              <h2 class="text-xl font-bold text-slate-900">National Electronic Health Record (NEHR)</h2>
+              <p class="text-slate-500 text-sm mt-1">Authoritative longitudinal health record for every citizen across all levels of the health system</p>
+            </div>
+            <div class="flex flex-col gap-1.5 text-right">
+              <span class="chip bg-blue-50 text-blue-700 border border-blue-200">FHIR R4</span>
+              <span class="chip bg-slate-100 text-slate-600 border border-slate-200">HL7</span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-2">What it does</div>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              The NEHR consolidates clinical encounters, laboratory and imaging results, diagnoses, treatments, referrals, and care plans across all levels of the health system. It includes a <strong>Patient Access Module</strong> — a responsive web application accessible via mobile, tablet, and desktop — enabling both patients and clinicians to access and manage longitudinal health records.
+              <span class="rfp-cite ml-2" data-cite="nehr_patient_access"><span class="cite-icon">ℹ</span> RFP §2 Patient Access</span>
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Functional Requirements -->
+            <div class="lg:col-span-2">
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Functional Requirements</h3>
+              <div id="accordion-NEHR" class="mt-1"></div>
+            </div>
+
+            <!-- Right sidebar: NFRs + Integrations + Special -->
+            <div class="space-y-5">
+              <!-- NFRs -->
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Non-Functional Requirements</h3>
+                <div class="space-y-2.5">
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Availability</div>
+                      <div class="text-xs text-slate-500">99.999% uptime (excl. planned outages)</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="nehr_availability"><span class="cite-icon">ℹ</span> NFN.4</span>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Search Performance</div>
+                      <div class="text-xs text-slate-500">99.9% of FHIR search-get &lt; 1 second</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="nehr_performance"><span class="cite-icon">ℹ</span> NFN.0</span>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Data Residency</div>
+                      <div class="text-xs text-slate-500">All data within Sri Lanka datacenters</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="data_residency"><span class="cite-icon">ℹ</span> NFN.7</span>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5 text-sm">⚠</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">SLCERT Certification</div>
+                      <div class="text-xs text-slate-500">Vendor must obtain SL government security cert</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="slcert"><span class="cite-icon">ℹ</span> §4 Security</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Integrations -->
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Key Integrations</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="chip bg-violet-50 text-violet-700 border border-violet-200">Identity Provider</span>
+                  <span class="chip bg-indigo-50 text-indigo-700 border border-indigo-200">NHDX</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">Client Registry</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">Provider Registry</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">Facility Registry</span>
+                  <span class="chip bg-teal-50 text-teal-700 border border-teal-200">Terminology Svc</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">SLUDI</span>
+                  <span class="chip bg-emerald-50 text-emerald-700 border border-emerald-200">e-Referral</span>
+                </div>
+              </div>
+
+              <!-- Special Considerations -->
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wide mb-3">⚠ Special Considerations</h3>
+                <ul class="space-y-1.5 text-xs text-amber-900">
+                  <li>• Multilingual: Sinhala + Tamil support required for all patient-facing content</li>
+                  <li>• Death declaration, redaction, and permanent deletion workflows required</li>
+                  <li>• Patient Access Module must work on mobile, tablet, and desktop</li>
+                  <li>• Synthetic data generation tools required for load testing</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TAB 2: NHDX ──────────────────────────────────────────────────── -->
+        <div class="tab-panel p-6" id="tab-nhdx">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 2 of 5</span>
+                <span class="rfp-cite" data-cite="nhdx_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
+              </div>
+              <h2 class="text-xl font-bold text-slate-900">National Health Data Exchange (NHDX) + API Manager</h2>
+              <p class="text-slate-500 text-sm mt-1">Central interoperability layer — Enterprise Service Bus for all DHP components and legacy systems</p>
+            </div>
+            <div class="flex flex-col gap-1.5 text-right">
+              <span class="chip bg-indigo-50 text-indigo-700 border border-indigo-200">ESB / OpenHIE</span>
+              <span class="chip bg-slate-100 text-slate-600 border border-slate-200">API Gateway</span>
+            </div>
+          </div>
+
+          <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-2">What it does</div>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              The NHDX acts as a unified integration hub — enabling secure, standards-based data exchange across all DHP components (NEHR, IdP, Terminology, e-Referral), legacy HIS systems, disease surveillance, and drug distribution. It includes an API management layer for authentication, throttling, monitoring, error handling, logging, and analytics.
+              The vendor must also organize <strong>Connectathons</strong> — structured integration testing events with legacy HIS vendors.
+              <span class="rfp-cite ml-2" data-cite="nhdx_connectathon"><span class="cite-icon">ℹ</span> RFP §2 Connectathons</span>
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Functional Requirements</h3>
+              <div id="accordion-NHDX" class="mt-1"></div>
+            </div>
+
+            <div class="space-y-5">
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Non-Functional Requirements</h3>
+                <div class="space-y-2.5">
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Availability</div>
+                      <div class="text-xs text-slate-500">99.999% uptime (excl. planned outages)</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="iol_availability"><span class="cite-icon">ℹ</span> NFN.4</span>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Sandbox Environments</div>
+                      <div class="text-xs text-slate-500">Separate sandbox + production; legacy vendor support</div>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">CI/CD Pipelines</div>
+                      <div class="text-xs text-slate-500">Dev / test / staging / production / sandbox</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="ci_cd"><span class="cite-icon">ℹ</span> §4 DevOps</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Legacy HIS to Integrate</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="chip bg-red-50 text-red-700 border border-red-200">HHIMS</span>
+                  <span class="chip bg-red-50 text-red-700 border border-red-200">HIMS</span>
+                  <span class="chip bg-red-50 text-red-700 border border-red-200">OpenMRS</span>
+                  <span class="chip bg-red-50 text-red-700 border border-red-200">Swastha</span>
+                  <span class="chip bg-red-50 text-red-700 border border-red-200">CloudHIMS</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">Each is a different vendor. Documentation quality is unknown — treat as high risk.</p>
+              </div>
+
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wide mb-3">⚠ Special Considerations</h3>
+                <ul class="space-y-1.5 text-xs text-amber-900">
+                  <li>• Must organize and run Connectathons with all legacy HIS vendors</li>
+                  <li>• Java and PHP adapters must be built from scratch</li>
+                  <li>• No duplicate APM/audit services — must use national platforms</li>
+                  <li>• No proprietary components — open architecture mandatory</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TAB 3: Identity Provider ────────────────────────────────────── -->
+        <div class="tab-panel p-6" id="tab-idp">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="bg-violet-100 text-violet-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 3 of 5</span>
+                <span class="rfp-cite" data-cite="idp_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
+              </div>
+              <h2 class="text-xl font-bold text-slate-900">Identity Provider (IdP)</h2>
+              <p class="text-slate-500 text-sm mt-1">Authentication and authorization services for all DHP components — Keycloak or similar FOSS</p>
+            </div>
+            <div class="flex flex-col gap-1.5 text-right">
+              <span class="chip bg-violet-50 text-violet-700 border border-violet-200">OAuth2 / OIDC</span>
+              <span class="chip bg-slate-100 text-slate-600 border border-slate-200">FOSS / Keycloak</span>
+            </div>
+          </div>
+
+          <div class="bg-violet-50 border border-violet-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-semibold text-violet-600 uppercase tracking-wider mb-2">What it does</div>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              Delivers secure, scalable authentication and authorization for all DHP components. Initial focus is on system-level authentication for services connecting to the NHDX. Must be open-source (Keycloak or equivalent) using OAuth2/OpenID Connect.
+              The architecture must also allow future expansion to person-level identity and federation with Sri Lanka's national digital ID system (SLUDI).
+              <span class="rfp-cite ml-2" data-cite="idp_future"><span class="cite-icon">ℹ</span> RFP §2 Future Scope</span>
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Functional Requirements</h3>
+              <div id="accordion-IDP" class="mt-1"></div>
+            </div>
+
+            <div class="space-y-5">
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Non-Functional Requirements</h3>
+                <div class="space-y-2.5">
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Auth Latency</div>
+                      <div class="text-xs text-slate-500">≤600ms median (OIDC flow) under normal load</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="idp_performance"><span class="cite-icon">ℹ</span> NFR-02</span>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Throughput</div>
+                      <div class="text-xs text-slate-500">5,000 logins/min + 100,000 token validations/min</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="idp_performance"><span class="cite-icon">ℹ</span> NFR-02</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Key Integrations</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="chip bg-blue-50 text-blue-700 border border-blue-200">NEHR</span>
+                  <span class="chip bg-indigo-50 text-indigo-700 border border-indigo-200">NHDX</span>
+                  <span class="chip bg-teal-50 text-teal-700 border border-teal-200">Terminology</span>
+                  <span class="chip bg-emerald-50 text-emerald-700 border border-emerald-200">e-Referral</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">SLUDI (future)</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">All DHP services</span>
+                </div>
+              </div>
+
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wide mb-3">⚠ Special Considerations</h3>
+                <ul class="space-y-1.5 text-xs text-amber-900">
+                  <li>• Must be FOSS (Keycloak or equivalent) — no proprietary IAM</li>
+                  <li>• Offline hospital mode is a hard requirement (internet unreliability)</li>
+                  <li>• Must architect for SLUDI federation even if not implemented now</li>
+                  <li>• 28 functional requirements total (FR-01 through FR-28)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TAB 4: Terminology Services ────────────────────────────────── -->
+        <div class="tab-panel p-6" id="tab-terminology">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 4 of 5</span>
+                <span class="rfp-cite" data-cite="terminology_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
+              </div>
+              <h2 class="text-xl font-bold text-slate-900">Terminology Services + Medication &amp; Device Registry</h2>
+              <p class="text-slate-500 text-sm mt-1">Centralised management of clinical terminologies (ICD, LOINC, SNOMED, ATC/DDD) with multilingual support</p>
+            </div>
+            <div class="flex flex-col gap-1.5 text-right">
+              <span class="chip bg-teal-50 text-teal-700 border border-teal-200">ICD-10/11</span>
+              <span class="chip bg-slate-100 text-slate-600 border border-slate-200">LOINC / SNOMED</span>
+            </div>
+          </div>
+
+          <div class="bg-teal-50 border border-teal-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-semibold text-teal-600 uppercase tracking-wider mb-2">What it does</div>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              Provides centralized management of standardized clinical terminologies, underpinning prescribing, diagnostics, reporting, drug distribution, and analytics. Includes a Medication &amp; Device Registry tracking substances and devices nationally. Must support Sinhala and Tamil translations/transliterations for all public-facing terminology.
+              <span class="rfp-cite ml-2" data-cite="terminology_multilingual"><span class="cite-icon">ℹ</span> RFP §2 Multilingual</span>
+            </p>
+          </div>
+
+          <!-- Procurement warning banner -->
+          <div class="bg-red-50 border border-red-300 rounded-xl p-4 mb-6 flex items-start gap-3">
+            <span class="text-red-500 text-xl mt-0.5">🔴</span>
+            <div>
+              <div class="font-semibold text-red-800 text-sm mb-1">Third-Party Procurement Required</div>
+              <p class="text-red-700 text-xs leading-relaxed">The vendor must <strong>procure</strong> on MoH's behalf: (1) Drug-drug interaction database (ATC-coded), (2) Drug side-effects database. These are commercial licensed databases — procurement timelines and costs are unpredictable and outside the vendor's control.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Functional Requirements</h3>
+              <div id="accordion-TS" class="mt-1"></div>
+            </div>
+
+            <div class="space-y-5">
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Non-Functional Requirements</h3>
+                <div class="space-y-2.5">
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Query Performance</div>
+                      <div class="text-xs text-slate-500">99.9% of terminology queries &lt; 1 second</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="ts_performance"><span class="cite-icon">ℹ</span> NFN.1</span>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5 text-sm">⚠</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Multilingual (NFN)</div>
+                      <div class="text-xs text-slate-500">Sinhala + Tamil for all public-facing codes</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="ts_multilingual_nfn"><span class="cite-icon">ℹ</span> NFN.13</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Terminologies Required</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="chip bg-teal-50 text-teal-700 border border-teal-200">ICD-10 / ICD-11</span>
+                  <span class="chip bg-teal-50 text-teal-700 border border-teal-200">LOINC</span>
+                  <span class="chip bg-teal-50 text-teal-700 border border-teal-200">SNOMED subsets</span>
+                  <span class="chip bg-teal-50 text-teal-700 border border-teal-200">ATC / DDD</span>
+                  <span class="chip bg-red-50 text-red-700 border border-red-200">Drug-Drug DB (procure)</span>
+                  <span class="chip bg-red-50 text-red-700 border border-red-200">Side-effects DB (procure)</span>
+                </div>
+              </div>
+
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wide mb-3">⚠ Special Considerations</h3>
+                <ul class="space-y-1.5 text-xs text-amber-900">
+                  <li>• Medical translation into Sinhala/Tamil requires specialist translators</li>
+                  <li>• Database licensing timelines are external dependencies</li>
+                  <li>• 18 functional requirements (TSF-1 to TSF-18) + 18 NFRs</li>
+                  <li>• ATC→MSD SR code semantic mapping required</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TAB 5: e-Referral ───────────────────────────────────────────── -->
+        <div class="tab-panel p-6" id="tab-ereferral">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 5 of 5</span>
+                <span class="rfp-cite" data-cite="ereferral_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
+              </div>
+              <h2 class="text-xl font-bold text-slate-900">e-Referral System + Appointment Management</h2>
+              <p class="text-slate-500 text-sm mt-1">Structured, traceable referral workflows across preventive, primary, secondary and tertiary care</p>
+            </div>
+            <div class="flex flex-col gap-1.5 text-right">
+              <span class="chip bg-emerald-50 text-emerald-700 border border-emerald-200">39 FRs</span>
+              <span class="chip bg-slate-100 text-slate-600 border border-slate-200">FHIR R4</span>
+            </div>
+          </div>
+
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-2">What it does</div>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              Enables electronic referrals from creation through acceptance, scheduling, and completion. Manages appointment sessions (daily/weekly/monthly/ad-hoc), quota allocation per referring unit, and automated patient notifications. Tracks referral status across the full lifecycle. Also provides analytics on referral volumes and service utilisation.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Functional Requirements</h3>
+              <div id="accordion-ER" class="mt-1"></div>
+            </div>
+
+            <div class="space-y-5">
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Non-Functional Requirements</h3>
+                <div class="space-y-2.5">
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Availability</div>
+                      <div class="text-xs text-slate-500">99.999% uptime (excl. planned outages)</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="er_availability"><span class="cite-icon">ℹ</span> ER.NFN.4</span>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2">
+                    <span class="text-green-500 mt-0.5 text-sm">✓</span>
+                    <div>
+                      <div class="text-xs font-semibold text-slate-700">Notification Latency</div>
+                      <div class="text-xs text-slate-500">99.9% of notifications sent within 5 seconds</div>
+                      <span class="rfp-cite mt-1 inline-block" data-cite="er_notification_perf"><span class="cite-icon">ℹ</span> ER.NFN.7</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Key Integrations</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="chip bg-blue-50 text-blue-700 border border-blue-200">NEHR</span>
+                  <span class="chip bg-indigo-50 text-indigo-700 border border-indigo-200">NHDX</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">Client Registry</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">Provider Registry</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">Facility Registry</span>
+                  <span class="chip bg-violet-50 text-violet-700 border border-violet-200">Identity Provider</span>
+                </div>
+              </div>
+
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wide mb-3">⚠ Special Considerations</h3>
+                <ul class="space-y-1.5 text-xs text-amber-900">
+                  <li>• 39 functional requirements (RAM-001 to RAM-039)</li>
+                  <li>• Telehealth + patient self-service scheduling: extensibility requirement</li>
+                  <li>• Multilingual notifications (Sinhala/Tamil) required</li>
+                  <li>• Must handle Sri Lanka-specific workflow (trade union disruptions, booking cut-off enforcement)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Requirements footer note -->
+      <div class="bg-slate-800 rounded-xl p-5 text-sm text-slate-300">
+        <div class="flex items-start gap-3">
+          <span class="text-slate-400 text-lg mt-0.5">📋</span>
+          <div>
+            <div class="font-semibold text-white mb-1">Common Requirements (apply to ALL 5 systems)</div>
+            <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs">
+              <span>• Must NOT duplicate certificate, audit, APM, or ETL services <span class="rfp-cite" data-cite="cc_no_duplication"><span class="cite-icon">ℹ</span> CC.INT.13</span></span>
+              <span>• Integrate with nationally provided Certificate Services <span class="rfp-cite" data-cite="cc_cert_integration"><span class="cite-icon">ℹ</span> CC.INT.01</span></span>
+              <span>• Use central APM platform — no separate monitoring stack <span class="rfp-cite" data-cite="cc_apm"><span class="cite-icon">ℹ</span> CC.INT.03</span></span>
+              <span>• All IP vests exclusively with MoH <span class="rfp-cite" data-cite="ip_moh"><span class="cite-icon">ℹ</span> §5</span></span>
+              <span>• FHIR R4 mandatory across all components <span class="rfp-cite" data-cite="fhir_all"><span class="cite-icon">ℹ</span> §2 FHIR</span></span>
+              <span>• Open-source preferred over bespoke development <span class="rfp-cite" data-cite="open_source_priority"><span class="cite-icon">ℹ</span> §4</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/requirements-data.js"></script>
+  <script src="js/citations.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    initNav('systems');
+
+    function renderAccordion(systemKey, containerId) {
+      const system = rfpRequirements[systemKey];
+      const container = document.getElementById(containerId);
+      container.innerHTML = `
+        <div class="mb-2 text-xs text-slate-500 italic">MVP scope is Allion Tech's recommendation — exact scope confirmed at Inception Report (Week 4, D1)</div>
+        <div class="space-y-1">
+          ${system.areas.map(area => `
+            <div class="accordion-area border border-slate-200 rounded-lg overflow-hidden">
+              <button class="accordion-trigger w-full flex items-center justify-between px-4 py-3 bg-white hover:bg-slate-50 transition-colors" type="button">
+                <div class="flex items-center gap-3">
+                  <svg class="accordion-chevron w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  <span class="text-sm font-semibold text-slate-800 text-left">${area.label}</span>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0 ml-2">
+                  <span class="text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">${area.requirements.length} req(s)</span>
+                  ${area.mvp
+                    ? '<span class="text-xs font-medium bg-green-100 text-green-700 px-2 py-0.5 rounded-full">MVP</span>'
+                    : '<span class="text-xs font-medium bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">Post-MVP</span>'
+                  }
+                </div>
+              </button>
+              <div class="accordion-body border-t border-slate-100">
+                <div class="divide-y divide-slate-50">
+                  ${area.requirements.map(req => `
+                    <div class="px-4 py-3 bg-white">
+                      <div class="pl-7">
+                        <div class="flex items-center gap-2 flex-wrap">
+                          <span class="text-xs font-mono text-slate-400 flex-shrink-0">${req.id}</span>
+                          <span class="text-sm font-medium text-slate-700">${req.title}</span>
+                          ${req.mvp
+                            ? '<span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-medium flex-shrink-0">MVP</span>'
+                            : '<span class="text-xs bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded font-medium flex-shrink-0">Post-MVP</span>'
+                          }
+                          ${req.cite
+                            ? `<span class="rfp-cite cursor-help flex-shrink-0" data-cite="${req.cite}"><span class="cite-icon">ℹ</span></span>`
+                            : ''
+                          }
+                        </div>
+                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">${req.desc}</p>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      container.querySelectorAll('.accordion-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const body = btn.nextElementSibling;
+          const chevron = btn.querySelector('.accordion-chevron');
+          const isOpen = body.classList.contains('open');
+          body.classList.toggle('open', !isOpen);
+          chevron.classList.toggle('open', !isOpen);
+        });
+      });
+    }
+
+    // Render all system accordions
+    renderAccordion('NEHR', 'accordion-NEHR');
+    renderAccordion('NHDX', 'accordion-NHDX');
+    renderAccordion('IDP', 'accordion-IDP');
+    renderAccordion('TS', 'accordion-TS');
+    renderAccordion('ER', 'accordion-ER');
+
+    // Init tooltips after accordions are rendered (covers both static + dynamic rfp-cite elements)
+    initTooltips();
+
+    // Tab switching
+    document.getElementById('tab-bar').addEventListener('click', e => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn) return;
+      const tabId = btn.dataset.tab;
+
+      // Update buttons
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.classList.add('text-slate-500', 'hover:bg-slate-50');
+        b.classList.remove('text-white');
+      });
+      btn.classList.add('active');
+      btn.classList.remove('text-slate-500', 'hover:bg-slate-50');
+
+      // Update panels
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+    });
+  </script>
+</body>
+</html>

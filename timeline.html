@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline & Gantt — RFP Analysis Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .rfp-cite {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 11px;
+      color: #22d3ee;
+      cursor: help;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .rfp-cite .cite-icon { font-size: 9px; opacity: 0.8; }
+    #rfp-tooltip { display: none; }
+
+    /* Gantt */
+    .gantt-container { overflow-x: auto; }
+    .gantt-grid {
+      display: grid;
+      grid-template-columns: 200px repeat(30, minmax(28px, 1fr));
+      min-width: 1100px;
+    }
+    .gantt-header-row {
+      display: contents;
+    }
+    .gantt-week-header {
+      font-size: 10px;
+      font-weight: 600;
+      color: #64748b;
+      text-align: center;
+      padding: 6px 0;
+      border-bottom: 2px solid #e2e8f0;
+      border-right: 1px solid #f1f5f9;
+      background: #f8fafc;
+    }
+    .gantt-label-header {
+      font-size: 10px;
+      font-weight: 700;
+      color: #475569;
+      padding: 6px 10px;
+      border-bottom: 2px solid #e2e8f0;
+      background: #f8fafc;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .gantt-row {
+      display: contents;
+    }
+    .gantt-row:hover .gantt-cell,
+    .gantt-row:hover .gantt-label {
+      background: #f0f9ff;
+    }
+    .gantt-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1e293b;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      border-bottom: 1px solid #f1f5f9;
+      background: white;
+    }
+    .gantt-cell {
+      border-right: 1px solid #f1f5f9;
+      border-bottom: 1px solid #f1f5f9;
+      position: relative;
+      background: white;
+      min-height: 44px;
+    }
+    /* Alternating shading for quarter groups */
+    .gantt-cell.q1 { background: #fafafa; }
+    .gantt-cell.q2 { background: #f8fafc; }
+    .gantt-cell.q3 { background: #fafafa; }
+    .gantt-cell.q4 { background: #f8fafc; }
+
+    .gantt-bar {
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      z-index: 2;
+      left: 0;
+      right: 0;
+    }
+    /* Badge */
+    .payment-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 3px;
+      padding: 1px 4px;
+      font-size: 9px;
+      font-weight: 800;
+      margin-left: 4px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+  <div id="nav-container"></div>
+
+  <main class="ml-60 min-h-screen">
+    <!-- Page header -->
+    <div class="bg-white border-b border-slate-200 px-8 py-6">
+      <div class="text-xs text-slate-400 font-semibold uppercase tracking-widest mb-1">RFP/2026/61570 · Bundle 2</div>
+      <h1 class="text-2xl font-bold text-slate-900">Timeline &amp; Gantt Chart</h1>
+      <p class="text-slate-500 text-sm mt-1">30-week delivery schedule, 8 deliverables, payment milestones, and critical path</p>
+    </div>
+
+    <div class="px-8 py-6 space-y-6">
+
+      <!-- Hard deadline banner -->
+      <div class="bg-red-900 rounded-xl p-4 flex items-center gap-3">
+        <span class="text-xl">⏰</span>
+        <div>
+          <span class="font-bold text-white">Hard External Deadline: December 2026</span>
+          <span class="text-red-200 text-sm ml-3">HiQi project funding expires — this is not negotiable.</span>
+          <span class="rfp-cite ml-2" data-cite="dec_2026_deadline"><span class="cite-icon">ℹ</span> §1.1</span>
+        </div>
+      </div>
+
+      <!-- Gantt Chart -->
+      <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+          <h2 class="font-bold text-slate-900">30-Week Delivery Gantt</h2>
+          <div class="flex items-center gap-4 text-xs text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-blue-400 inline-block"></span> Kickoff</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-green-500 inline-block"></span> Development</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-purple-500 inline-block"></span> Integration</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-orange-500 inline-block"></span> Operations</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-400 inline-block"></span> Closeout</span>
+          </div>
+        </div>
+        <div class="gantt-container p-4">
+          <div class="gantt-grid" id="gantt"></div>
+        </div>
+        <div class="px-6 pb-4 text-xs text-slate-400 italic">* Week numbers are relative to contract signature date. Weeks after week 30 = 12-month warranty period.</div>
+      </div>
+
+      <!-- Milestone table -->
+      <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b border-slate-100">
+          <h2 class="font-bold text-slate-900">Deliverable &amp; Payment Schedule</h2>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200">
+              <tr>
+                <th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">#</th>
+                <th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Deliverable</th>
+                <th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Due</th>
+                <th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Payment</th>
+                <th class="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">Key Acceptance Criteria</th>
+                <th class="px-4 py-3"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3"><span class="w-6 h-6 rounded-full bg-blue-500 text-white text-xs font-bold flex items-center justify-center">1</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-800">Inception Report</td>
+                <td class="px-4 py-3 text-slate-600 whitespace-nowrap">Week 4 from contract</td>
+                <td class="px-4 py-3"><span class="bg-blue-100 text-blue-800 font-bold text-xs px-2 py-1 rounded-full">5%</span></td>
+                <td class="px-4 py-3 text-xs text-slate-600">Project plan, technical architecture, MVP scope definition, risk register, team onboarding confirmation</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="inception_deliverable"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+              <tr class="hover:bg-slate-50 bg-green-50/40">
+                <td class="px-4 py-3"><span class="w-6 h-6 rounded-full bg-green-500 text-white text-xs font-bold flex items-center justify-center">2</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-800">Minimum Viable Product (MVP)</td>
+                <td class="px-4 py-3 text-slate-600 whitespace-nowrap">Week 10 from D1 acceptance (~wk 14)</td>
+                <td class="px-4 py-3"><span class="bg-green-100 text-green-800 font-bold text-xs px-2 py-1 rounded-full">20%</span></td>
+                <td class="px-4 py-3 text-xs text-slate-600">All 5 systems deployed, core FHIR APIs functional, basic end-to-end flows demonstrated, CI/CD pipeline, synthetic data load tests</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="mvp_deliverable"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3"><span class="w-6 h-6 rounded-full bg-purple-500 text-white text-xs font-bold flex items-center justify-center">3</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-800">Connectathon Readiness &amp; Execution</td>
+                <td class="px-4 py-3 text-slate-600 whitespace-nowrap">Week 4 from D2 acceptance (~wk 18)</td>
+                <td class="px-4 py-3"><span class="bg-purple-100 text-purple-800 font-bold text-xs px-2 py-1 rounded-full">10%</span></td>
+                <td class="px-4 py-3 text-xs text-slate-600">Sandbox live, Connectathons run with all legacy HIS vendors (HHIMS, HIMS, OpenMRS, Swastha, CloudHIMS), integration test results documented</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="connectathon_deliverable"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3"><span class="w-6 h-6 rounded-full bg-purple-600 text-white text-xs font-bold flex items-center justify-center">4</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-800">National System Integrations + Source Code</td>
+                <td class="px-4 py-3 text-slate-600 whitespace-nowrap">Week 4 from D3 (~wk 22)</td>
+                <td class="px-4 py-3"><span class="bg-purple-100 text-purple-800 font-bold text-xs px-2 py-1 rounded-full">20%</span></td>
+                <td class="px-4 py-3 text-xs text-slate-600">SLUDI, NDES, GovTech, national infrastructure integrations complete; source code committed to MoH repository</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="integration_deliverable"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3"><span class="w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center">5</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-800">Data Population, Mapping, Translations &amp; Ops Readiness</td>
+                <td class="px-4 py-3 text-slate-600 whitespace-nowrap">Week 2 from D4 (~wk 24)</td>
+                <td class="px-4 py-3"><span class="bg-orange-100 text-orange-800 font-bold text-xs px-2 py-1 rounded-full">5%</span></td>
+                <td class="px-4 py-3 text-xs text-slate-600">Terminology loaded (ICD, LOINC, ATC), Sinhala/Tamil translations complete, synthetic data migrated, operational runbooks ready</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="data_population_deliverable"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3"><span class="w-6 h-6 rounded-full bg-orange-600 text-white text-xs font-bold flex items-center justify-center">6</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-800">User Acceptance Testing (UAT) + Sign-Off</td>
+                <td class="px-4 py-3 text-slate-600 whitespace-nowrap">Week 2 from D5 (~wk 26)</td>
+                <td class="px-4 py-3"><span class="bg-orange-100 text-orange-800 font-bold text-xs px-2 py-1 rounded-full">10%</span></td>
+                <td class="px-4 py-3 text-xs text-slate-600">MoH stakeholders and clinicians sign off; all UAT test cases passed; defects resolved; performance benchmarks met</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="uat_deliverable"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3"><span class="w-6 h-6 rounded-full bg-slate-500 text-white text-xs font-bold flex items-center justify-center">7</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-800">Guides, Manuals &amp; Training Delivery</td>
+                <td class="px-4 py-3 text-slate-600 whitespace-nowrap">Week 2 from D6 (~wk 28)</td>
+                <td class="px-4 py-3"><span class="bg-slate-100 text-slate-700 font-bold text-xs px-2 py-1 rounded-full">5%</span></td>
+                <td class="px-4 py-3 text-xs text-slate-600">User manuals (Sinhala/Tamil/English), admin guides, training sessions completed, training attendance records</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="training_deliverable"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3"><span class="w-6 h-6 rounded-full bg-slate-600 text-white text-xs font-bold flex items-center justify-center">8</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-800">Final Report &amp; Closeout</td>
+                <td class="px-4 py-3 text-slate-600 whitespace-nowrap">Week 2 from D7 (~wk 30)</td>
+                <td class="px-4 py-3"><span class="bg-slate-100 text-slate-700 font-bold text-xs px-2 py-1 rounded-full">25%</span></td>
+                <td class="px-4 py-3 text-xs text-slate-600">Final project report, system handover, all assets transferred to MoH, Go-Live acceptance, warranty period starts</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="closeout_deliverable"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="px-4 py-3"><span class="text-slate-400 text-sm">+</span></td>
+                <td class="px-4 py-3 font-semibold text-slate-500 italic">12-Month Warranty Period</td>
+                <td class="px-4 py-3 text-slate-400 whitespace-nowrap">Post Week 30</td>
+                <td class="px-4 py-3"><span class="bg-slate-100 text-slate-500 font-bold text-xs px-2 py-1 rounded-full">Included</span></td>
+                <td class="px-4 py-3 text-xs text-slate-500">Bug fixes + 40 person-days/quarter for minor enhancements (≤5–6 days per CR), no extra cost</td>
+                <td class="px-4 py-3"><span class="rfp-cite" data-cite="warranty"><span class="cite-icon">ℹ</span></span></td>
+              </tr>
+            </tbody>
+            <tfoot class="bg-slate-100 border-t-2 border-slate-300">
+              <tr>
+                <td colspan="3" class="px-4 py-3 text-xs font-bold text-slate-700 uppercase">Total</td>
+                <td class="px-4 py-3"><span class="text-sm font-bold text-slate-900">100%</span></td>
+                <td colspan="2" class="px-4 py-3 text-xs text-slate-500">Net 30 days per deliverable — each payment requires both UNOPS and MoH acceptance
+                  <span class="rfp-cite ml-2" data-cite="payment_terms"><span class="cite-icon">ℹ</span> §12</span>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Critical path -->
+      <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <h2 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="text-red-500">🔴</span> Critical Path Analysis
+        </h2>
+        <div class="space-y-3">
+          <!-- Chain visualization -->
+          <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+            <div class="bg-blue-500 text-white px-3 py-1.5 rounded-lg">D1: Inception<br><span class="font-normal opacity-80">Wk 4 · 5%</span></div>
+            <span class="text-slate-400 text-lg">→</span>
+            <div class="bg-green-500 text-white px-3 py-1.5 rounded-lg">D2: MVP<br><span class="font-normal opacity-80">Wk ~14 · 20%</span></div>
+            <span class="text-slate-400 text-lg">→</span>
+            <div class="bg-purple-500 text-white px-3 py-1.5 rounded-lg">D3: Connectathon<br><span class="font-normal opacity-80">Wk ~18 · 10%</span></div>
+            <span class="text-slate-400 text-lg">→</span>
+            <div class="bg-purple-600 text-white px-3 py-1.5 rounded-lg">D4: Integrations<br><span class="font-normal opacity-80">Wk ~22 · 20%</span></div>
+            <span class="text-slate-400 text-lg">→</span>
+            <div class="bg-orange-500 text-white px-3 py-1.5 rounded-lg">D5–D8<br><span class="font-normal opacity-80">Wk 24–30 · 45%</span></div>
+            <span class="text-slate-400 text-lg">→</span>
+            <div class="bg-red-700 text-white px-3 py-1.5 rounded-lg font-bold">Dec 2026<br><span class="font-normal opacity-90">Hard stop</span></div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+              <div class="font-semibold text-red-800 text-sm mb-2">🔥 Tightest Window</div>
+              <p class="text-xs text-red-700 leading-relaxed">
+                The MVP must cover all 5 systems within <strong>10 weeks</strong> of Inception Report acceptance. If MoH takes 1–2 weeks to accept D1, the real build time could be 8–9 weeks. That is the most compressed and highest-risk portion of the entire contract.
+              </p>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+              <div class="font-semibold text-amber-800 text-sm mb-2">⚠ Connectathon Dependency</div>
+              <p class="text-xs text-amber-700 leading-relaxed">
+                Connectathons (D3) require coordination with 5 external legacy HIS vendors (HHIMS, HIMS, OpenMRS, Swastha, CloudHIMS). Vendor readiness and documentation quality are entirely outside Allion Tech's control. This can slip D3 and cascade into D4–D8.
+                <span class="rfp-cite ml-1" data-cite="nhdx_connectathon"><span class="cite-icon">ℹ</span></span>
+              </p>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+              <div class="font-semibold text-amber-800 text-sm mb-2">⚠ MoH Acceptance Bottleneck</div>
+              <p class="text-xs text-amber-700 leading-relaxed">
+                Every deliverable requires <strong>both UNOPS and MoH sign-off</strong> before the next phase clock starts. Stakeholder availability and review cycles are outside vendor control. A 2-week review delay on each of 8 deliverables = 16 weeks of unplanned buffer consumed.
+                <span class="rfp-cite ml-1" data-cite="payment_terms"><span class="cite-icon">ℹ</span></span>
+              </p>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+              <div class="font-semibold text-blue-800 text-sm mb-2">💡 Allion Tech Strategy Note</div>
+              <p class="text-xs text-blue-700 leading-relaxed">
+                The bid should include a <strong>realistic timeline with buffer allowances</strong> for MoH review cycles, SLCERT certification timelines, and Connectathon coordination. Proposing a fully compressed 30-week plan with no slack = high risk of penalties or rejection at later deliverables.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Warranty section -->
+      <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+        <h2 class="text-base font-bold text-slate-900 mb-3 flex items-center gap-2">
+          <span class="text-slate-500">🛡️</span> Post-Go-Live: 12-Month Warranty
+          <span class="rfp-cite" data-cite="warranty"><span class="cite-icon">ℹ</span> §4.7</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Duration</div>
+            <div class="text-lg font-bold text-slate-900">12 Months</div>
+            <div class="text-xs text-slate-500 mt-1">Starting from Go-Live acceptance (end of Week 30)</div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Included Support</div>
+            <div class="text-lg font-bold text-slate-900">40 person-days/qtr</div>
+            <div class="text-xs text-slate-500 mt-1">Minor enhancements ≤5–6 days per change request, at no additional cost</div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">SLA Response</div>
+            <div class="text-sm font-bold text-slate-900">Sev 1: 30 min / 4 hrs</div>
+            <div class="text-xs text-slate-500 mt-1">Sev 2: 1 hr / 24 hrs · Sev 3: 4 hrs / 3–5 days</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/citations.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    initNav('timeline');
+    initTooltips();
+
+    // ── Build Gantt ──────────────────────────────────────────────────────────
+    const deliverables = [
+      { label: 'D1: Inception Report',          start: 1,  end: 4,  color: '#3b82f6', payment: '5%',  phase: 'kickoff'     },
+      { label: 'D2: MVP Development',           start: 2,  end: 14, color: '#22c55e', payment: '20%', phase: 'development' },
+      { label: 'D3: Connectathon',              start: 15, end: 18, color: '#a855f7', payment: '10%', phase: 'integration' },
+      { label: 'D4: National Integrations',     start: 19, end: 22, color: '#7c3aed', payment: '20%', phase: 'integration' },
+      { label: 'D5: Data & Ops Readiness',      start: 23, end: 24, color: '#f97316', payment: '5%',  phase: 'operations'  },
+      { label: 'D6: UAT',                       start: 25, end: 26, color: '#ea580c', payment: '10%', phase: 'operations'  },
+      { label: 'D7: Training & Manuals',        start: 27, end: 28, color: '#64748b', payment: '5%',  phase: 'closeout'    },
+      { label: 'D8: Final Closeout',            start: 29, end: 30, color: '#475569', payment: '25%', phase: 'closeout'    },
+    ];
+
+    const grid = document.getElementById('gantt');
+    const WEEKS = 30;
+
+    // Header row
+    const labelHeader = document.createElement('div');
+    labelHeader.className = 'gantt-label-header';
+    labelHeader.textContent = 'Deliverable';
+    grid.appendChild(labelHeader);
+
+    for (let w = 1; w <= WEEKS; w++) {
+      const wh = document.createElement('div');
+      wh.className = 'gantt-week-header';
+      wh.textContent = w;
+      grid.appendChild(wh);
+    }
+
+    // Rows
+    deliverables.forEach(d => {
+      // Label cell
+      const lbl = document.createElement('div');
+      lbl.className = 'gantt-label';
+      lbl.textContent = d.label;
+      grid.appendChild(lbl);
+
+      // Week cells
+      for (let w = 1; w <= WEEKS; w++) {
+        const cell = document.createElement('div');
+        const qClass = w <= 8 ? 'q1' : w <= 16 ? 'q2' : w <= 22 ? 'q3' : 'q4';
+        cell.className = `gantt-cell ${qClass}`;
+
+        // If this cell is the start of the bar, create the spanning bar
+        if (w === d.start) {
+          const span = d.end - d.start + 1;
+          const bar = document.createElement('div');
+          bar.className = 'gantt-bar';
+          bar.style.backgroundColor = d.color;
+          bar.style.color = '#fff';
+          // Span across multiple cells using right offset
+          bar.style.left = '2px';
+          bar.style.right = `calc(${(WEEKS - d.end) / WEEKS * 100}% - ${(d.start - 1) / WEEKS * 100}% * 0)`;
+          // Actually use width approach via inline calc
+          bar.style.right = 'auto';
+          // Width = span cells * cell width (cells don't have fixed px so we use % of the grid track)
+          // We'll use a trick: position within the single start cell but set width to span N cells
+          // This works because overflow is visible and bar is position:absolute
+          bar.style.width = `calc(${span * 100}% + ${span - 1}px)`;
+          bar.innerHTML = `<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${d.label.split(':')[0]}</span><span class="payment-badge">${d.payment}</span>`;
+          cell.appendChild(bar);
+        }
+        grid.appendChild(cell);
+      }
+    });
+
+    // Warranty row
+    const wLbl = document.createElement('div');
+    wLbl.className = 'gantt-label';
+    wLbl.style.color = '#94a3b8';
+    wLbl.style.fontStyle = 'italic';
+    wLbl.textContent = '+ 12-Month Warranty';
+    grid.appendChild(wLbl);
+
+    for (let w = 1; w <= WEEKS; w++) {
+      const cell = document.createElement('div');
+      cell.className = 'gantt-cell q4';
+      if (w === 30) {
+        const bar = document.createElement('div');
+        bar.className = 'gantt-bar';
+        bar.style.backgroundColor = '#cbd5e1';
+        bar.style.color = '#64748b';
+        bar.style.fontSize = '9px';
+        bar.textContent = 'Warranty (post Week 30)';
+        cell.appendChild(bar);
+      }
+      grid.appendChild(cell);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RFP Overview — RFP/2026/61570</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/citations.js"></script>
+  <script src="js/nav.js"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+  <div id="nav-container"></div>
+
+  <main class="ml-60 min-h-screen">
+
+    <!-- Page header -->
+    <div class="bg-white border-b border-gray-200 px-8 py-6">
+      <div class="text-xs text-gray-400 font-medium uppercase tracking-widest mb-1">UNOPS RFP/2026/61570 · Allion Tech Analysis</div>
+      <h1 class="text-2xl font-bold text-gray-900">Sri Lanka National Digital Health Platform</h1>
+      <p class="text-gray-500 mt-1 text-sm">Bundle 2 — NEHR + NHDX + IdP + Terminology + e-Referral · Tender Overview</p>
+    </div>
+
+    <div class="px-8 py-7 space-y-8 max-w-6xl">
+
+      <!-- ── Key Facts Grid ─────────────────────────────────────────── -->
+      <section>
+        <h2 class="text-base font-semibold text-gray-700 uppercase tracking-wide mb-3">Key Facts at a Glance</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-blue-600">30</div>
+            <div class="text-xs text-gray-500 mt-0.5">weeks contract</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-blue-600">5</div>
+            <div class="text-xs text-gray-500 mt-0.5">core systems</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-blue-600">15+</div>
+            <div class="text-xs text-gray-500 mt-0.5">key personnel</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-blue-600">8</div>
+            <div class="text-xs text-gray-500 mt-0.5">deliverables</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-amber-500">~$20M</div>
+            <div class="text-xs text-gray-500 mt-0.5">total programme</div>
+          </div>
+          <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 text-center">
+            <div class="text-2xl font-bold text-red-500">Dec<br class="hidden"/>'26</div>
+            <div class="text-xs text-gray-500 mt-0.5">hard deadline</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Deadline Banner ────────────────────────────────────────── -->
+      <div class="bg-amber-50 border border-amber-300 rounded-xl px-5 py-4 flex items-start gap-3">
+        <span class="text-2xl">⏰</span>
+        <div>
+          <div class="font-semibold text-amber-900 text-sm">Hard External Deadline — December 2026</div>
+          <div class="text-amber-800 text-xs mt-0.5">
+            The HiQi/D2H funding from Germany's Federal Government expires December 2026. This is not a soft target — it is the funding cut-off.
+            <span class="rfp-cite cursor-help text-amber-700 underline decoration-dotted ml-1" data-cite="dec_2026_deadline">See RFP ℹ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── About This Tender ──────────────────────────────────────── -->
+      <section class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h2 class="text-base font-bold text-gray-900 mb-3">About This Tender</h2>
+        <div class="grid md:grid-cols-2 gap-6 text-sm text-gray-700 leading-relaxed">
+          <div>
+            <p class="mb-3">
+              <strong>UNOPS</strong> is procuring a software development firm on behalf of <strong>Sri Lanka's Ministry of Health (MoH)</strong> to design, build, test, deploy and maintain a national Digital Health Platform — specifically a subset called the <em>"thin-slice."</em>
+              <span class="rfp-cite cursor-help text-cyan-600 ml-1" data-cite="thin_slice">ℹ</span>
+            </p>
+            <p>
+              This is funded by <strong>Germany's Federal Government</strong> via the Global Fund (HiQi/Debt2Health programme), active until December 2026.
+              <span class="rfp-cite cursor-help text-cyan-600 ml-1" data-cite="hiq_project">ℹ</span>
+            </p>
+          </div>
+          <div>
+            <p class="mb-3">
+              The estimated total procurement budget is approximately <strong>USD 20 million</strong> across multiple bundles.
+              <span class="rfp-cite cursor-help text-cyan-600 ml-1" data-cite="budget_total">ℹ</span>
+              This tender covers <strong>Bundle #2</strong> — the five core digital health systems.
+            </p>
+            <p>
+              The contract is <strong>deliverable-based (fixed price)</strong>, denominated in <strong>LKR</strong>, with payment in 8 milestone tranches over 30 weeks.
+              <span class="rfp-cite cursor-help text-cyan-600 ml-1" data-cite="fixed_price">ℹ</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 5 Systems ──────────────────────────────────────────────── -->
+      <section>
+        <h2 class="text-base font-semibold text-gray-700 uppercase tracking-wide mb-3">What Needs to Be Built — 5 Systems</h2>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+          <!-- NEHR -->
+          <div class="bg-white rounded-xl border border-blue-200 shadow-sm p-5 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-blue-100 text-blue-700 rounded-lg px-2 py-0.5 text-xs font-bold">1</span>
+              <h3 class="font-bold text-gray-900 text-sm">NEHR</h3>
+              <span class="rfp-cite cursor-help text-cyan-500 text-xs ml-auto" data-cite="nehr_definition">ℹ</span>
+            </div>
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">National Electronic Health Record</div>
+            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+              Authoritative longitudinal health record for every Sri Lankan citizen. Consolidates clinical encounters, lab results, diagnoses, treatments, referrals, and care plans across all healthcare levels.
+            </p>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-blue-50 text-blue-700 rounded px-1.5 py-0.5 text-[10px] font-medium">FHIR R4</span>
+              <span class="bg-blue-50 text-blue-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Patient Portal</span>
+              <span class="bg-blue-50 text-blue-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Consent Mgmt</span>
+              <span class="bg-blue-50 text-blue-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Analytics</span>
+            </div>
+          </div>
+
+          <!-- NHDX -->
+          <div class="bg-white rounded-xl border border-indigo-200 shadow-sm p-5 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-indigo-100 text-indigo-700 rounded-lg px-2 py-0.5 text-xs font-bold">2</span>
+              <h3 class="font-bold text-gray-900 text-sm">NHDX</h3>
+              <span class="rfp-cite cursor-help text-cyan-500 text-xs ml-auto" data-cite="nhdx_definition">ℹ</span>
+            </div>
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">National Health Data Exchange</div>
+            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+              Central interoperability layer (ESB/OpenHIE model) enabling secure, standards-based data exchange across all DHP components. Includes API management, routing, transformation, and monitoring.
+            </p>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-indigo-50 text-indigo-700 rounded px-1.5 py-0.5 text-[10px] font-medium">OpenHIE</span>
+              <span class="bg-indigo-50 text-indigo-700 rounded px-1.5 py-0.5 text-[10px] font-medium">API Manager</span>
+              <span class="bg-indigo-50 text-indigo-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Connectathon</span>
+              <span class="bg-indigo-50 text-indigo-700 rounded px-1.5 py-0.5 text-[10px] font-medium">HIS Adapters</span>
+            </div>
+          </div>
+
+          <!-- IdP -->
+          <div class="bg-white rounded-xl border border-violet-200 shadow-sm p-5 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-violet-100 text-violet-700 rounded-lg px-2 py-0.5 text-xs font-bold">3</span>
+              <h3 class="font-bold text-gray-900 text-sm">Identity Provider</h3>
+              <span class="rfp-cite cursor-help text-cyan-500 text-xs ml-auto" data-cite="idp_definition">ℹ</span>
+            </div>
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">IdP — OAuth2/OIDC</div>
+            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+              Open-source IAM (Keycloak or similar FOSS). Secure authentication and authorization for all DHP components. Supports MFA, SSO, RBAC, offline access, and future federation with national digital ID (SLUDI).
+            </p>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-violet-50 text-violet-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Keycloak</span>
+              <span class="bg-violet-50 text-violet-700 rounded px-1.5 py-0.5 text-[10px] font-medium">OAuth2/OIDC</span>
+              <span class="bg-violet-50 text-violet-700 rounded px-1.5 py-0.5 text-[10px] font-medium">MFA</span>
+              <span class="bg-violet-50 text-violet-700 rounded px-1.5 py-0.5 text-[10px] font-medium">SSO</span>
+            </div>
+          </div>
+
+          <!-- Terminology -->
+          <div class="bg-white rounded-xl border border-teal-200 shadow-sm p-5 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-teal-100 text-teal-700 rounded-lg px-2 py-0.5 text-xs font-bold">4</span>
+              <h3 class="font-bold text-gray-900 text-sm">Terminology Services</h3>
+              <span class="rfp-cite cursor-help text-cyan-500 text-xs ml-auto" data-cite="terminology_definition">ℹ</span>
+            </div>
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">+ Medication & Device Registry</div>
+            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+              Centralised management of ICD-10/11, LOINC, SNOMED subsets, ATC/DDD. Includes drug-drug interaction and side-effects databases (must be procured). Full Sinhala/Tamil translation required.
+            </p>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-teal-50 text-teal-700 rounded px-1.5 py-0.5 text-[10px] font-medium">ICD-10/11</span>
+              <span class="bg-teal-50 text-teal-700 rounded px-1.5 py-0.5 text-[10px] font-medium">LOINC</span>
+              <span class="bg-teal-50 text-teal-700 rounded px-1.5 py-0.5 text-[10px] font-medium">SNOMED</span>
+              <span class="bg-teal-50 text-teal-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Multilingual</span>
+            </div>
+          </div>
+
+          <!-- e-Referral -->
+          <div class="bg-white rounded-xl border border-emerald-200 shadow-sm p-5 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="bg-emerald-100 text-emerald-700 rounded-lg px-2 py-0.5 text-xs font-bold">5</span>
+              <h3 class="font-bold text-gray-900 text-sm">e-Referral System</h3>
+              <span class="rfp-cite cursor-help text-cyan-500 text-xs ml-auto" data-cite="ereferral_definition">ℹ</span>
+            </div>
+            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">+ Appointment Management</div>
+            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+              Structured, traceable referral workflows across all care levels. Lifecycle tracking (created → scheduled → completed), session management, quota allocation, patient notifications, and referral analytics.
+            </p>
+            <div class="flex flex-wrap gap-1">
+              <span class="bg-emerald-50 text-emerald-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Referrals</span>
+              <span class="bg-emerald-50 text-emerald-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Scheduling</span>
+              <span class="bg-emerald-50 text-emerald-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Notifications</span>
+              <span class="bg-emerald-50 text-emerald-700 rounded px-1.5 py-0.5 text-[10px] font-medium">Analytics</span>
+            </div>
+          </div>
+
+          <!-- Quick links card -->
+          <div class="bg-slate-50 rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-slate-700 text-sm mb-2">Dive Deeper</h3>
+              <p class="text-xs text-slate-500 mb-4">Explore detailed requirements, MVP scope, timeline, and risk analysis.</p>
+            </div>
+            <div class="space-y-2">
+              <a href="systems.html" class="block text-xs text-blue-600 hover:underline font-medium">→ Systems Breakdown (functional requirements)</a>
+              <a href="mvp.html"    class="block text-xs text-blue-600 hover:underline font-medium">→ MVP Breakdown (scope per system)</a>
+              <a href="timeline.html" class="block text-xs text-blue-600 hover:underline font-medium">→ Timeline & Gantt Chart</a>
+              <a href="risks.html"  class="block text-xs text-red-600 hover:underline font-medium">→ Risks & Red Flags</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Bundle Table ────────────────────────────────────────────── -->
+      <section class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-100">
+          <h2 class="font-bold text-gray-900 text-sm">Programme Bundle Structure</h2>
+          <p class="text-xs text-gray-500 mt-0.5">Five bundles in total — this RFP covers Bundle 2 (and elements of Bundle 3)
+            <span class="rfp-cite cursor-help text-cyan-500 ml-1" data-cite="bundle_2">ℹ</span>
+          </p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs">
+            <thead class="bg-gray-50 text-gray-500 uppercase tracking-wide text-[10px]">
+              <tr>
+                <th class="px-5 py-2.5 text-left font-semibold w-24">Bundle</th>
+                <th class="px-5 py-2.5 text-left font-semibold">Name</th>
+                <th class="px-5 py-2.5 text-left font-semibold">Components</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="text-gray-500">
+                <td class="px-5 py-3 font-medium">1</td>
+                <td class="px-5 py-3">Registries</td>
+                <td class="px-5 py-3">Client, Provider and Facilities Registries</td>
+              </tr>
+              <tr class="bg-blue-50">
+                <td class="px-5 py-3 font-bold text-blue-700">2 ← This RFP</td>
+                <td class="px-5 py-3 font-bold text-blue-700">NEHR Bundle</td>
+                <td class="px-5 py-3 text-blue-800 font-medium">NEHR · NHDX (+ API Manager) · Identity Provider · Terminology Services (incl. Medication & Device Registry) · e-Referral (+ Appointments)</td>
+              </tr>
+              <tr class="text-gray-500">
+                <td class="px-5 py-3 font-medium">3</td>
+                <td class="px-5 py-3">Platform Support Services</td>
+                <td class="px-5 py-3">Certificate Services · APM & SIEM · Audit Repository · Time Keeping</td>
+              </tr>
+              <tr class="text-gray-500">
+                <td class="px-5 py-3 font-medium">4</td>
+                <td class="px-5 py-3">Secondary Data Use</td>
+                <td class="px-5 py-3">Secondary Use Cases · ETL Framework · DHIW/HMIS</td>
+              </tr>
+              <tr class="text-gray-500">
+                <td class="px-5 py-3 font-medium">5</td>
+                <td class="px-5 py-3">Digital Imaging & Documents</td>
+                <td class="px-5 py-3">Document & Imaging Repository · Record Locator / Index</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── Technology & Stack ─────────────────────────────────────── -->
+      <section class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h2 class="font-bold text-gray-900 text-sm mb-4">
+          Technology Stack (RFP-Specified)
+          <span class="rfp-cite cursor-help text-cyan-500 text-xs ml-1 font-normal" data-cite="tech_stack">ℹ</span>
+        </h2>
+        <div class="grid md:grid-cols-3 gap-4 text-xs">
+          <div>
+            <div class="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-2">Languages</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-orange-100 text-orange-800 rounded px-2 py-0.5 font-medium">Java (primary)</span>
+              <span class="bg-orange-100 text-orange-800 rounded px-2 py-0.5 font-medium">Python</span>
+              <span class="bg-orange-100 text-orange-800 rounded px-2 py-0.5 font-medium">JavaScript</span>
+              <span class="bg-orange-100 text-orange-800 rounded px-2 py-0.5 font-medium">PHP</span>
+            </div>
+          </div>
+          <div>
+            <div class="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-2">Databases</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-sky-100 text-sky-800 rounded px-2 py-0.5 font-medium">PostgreSQL</span>
+              <span class="bg-sky-100 text-sky-800 rounded px-2 py-0.5 font-medium">MongoDB</span>
+              <span class="bg-sky-100 text-sky-800 rounded px-2 py-0.5 font-medium">MySQL</span>
+            </div>
+          </div>
+          <div>
+            <div class="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-2">Standards</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-green-100 text-green-800 rounded px-2 py-0.5 font-medium">HL7 FHIR R4</span>
+              <span class="bg-green-100 text-green-800 rounded px-2 py-0.5 font-medium">OAuth2/OIDC</span>
+              <span class="bg-green-100 text-green-800 rounded px-2 py-0.5 font-medium">IHE Profiles</span>
+              <span class="bg-green-100 text-green-800 rounded px-2 py-0.5 font-medium">OpenHIE</span>
+            </div>
+          </div>
+          <div>
+            <div class="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-2">Open Source Priority</div>
+            <div class="text-gray-600 leading-relaxed">
+              <span class="rfp-cite cursor-help text-cyan-500 mr-1" data-cite="open_source_priority">ℹ</span>
+              1st choice: Configure existing FOSS → 2nd: Customise FOSS → 3rd: Bespoke development (last resort)
+            </div>
+          </div>
+          <div>
+            <div class="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-2">Infrastructure</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-gray-100 text-gray-700 rounded px-2 py-0.5 font-medium">Lanka Govt Cloud</span>
+              <span class="bg-gray-100 text-gray-700 rounded px-2 py-0.5 font-medium">MoH Tier III DC</span>
+              <span class="bg-gray-100 text-gray-700 rounded px-2 py-0.5 font-medium">LGN</span>
+            </div>
+          </div>
+          <div>
+            <div class="text-[10px] font-semibold text-gray-500 uppercase tracking-wide mb-2">Security</div>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="bg-red-100 text-red-800 rounded px-2 py-0.5 font-medium">TLS 1.2+</span>
+              <span class="bg-red-100 text-red-800 rounded px-2 py-0.5 font-medium">RBAC</span>
+              <span class="bg-red-100 text-red-800 rounded px-2 py-0.5 font-medium">SLCERT</span>
+              <span class="bg-red-100 text-red-800 rounded px-2 py-0.5 font-medium">PDPA</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Commercial Summary ─────────────────────────────────────── -->
+      <section class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h2 class="font-bold text-gray-900 text-sm mb-4">Commercial Terms Summary</h2>
+        <div class="grid md:grid-cols-2 gap-4 text-xs text-gray-700">
+          <div class="space-y-2">
+            <div class="flex gap-3">
+              <span class="text-gray-400 w-36 shrink-0 font-medium">Contract type</span>
+              <span>Deliverable-based fixed price <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="fixed_price">ℹ</span></span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gray-400 w-36 shrink-0 font-medium">Currency</span>
+              <span>Sri Lankan Rupees (LKR) <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="lkr_currency">ℹ</span></span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gray-400 w-36 shrink-0 font-medium">Payment terms</span>
+              <span>Net 30 days per accepted deliverable <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="payment_terms">ℹ</span></span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gray-400 w-36 shrink-0 font-medium">IP ownership</span>
+              <span class="text-red-700 font-medium">100% MoH — vendor retains zero <span class="rfp-cite cursor-help text-cyan-500 ml-0.5 font-normal" data-cite="ip_moh">ℹ</span></span>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex gap-3">
+              <span class="text-gray-400 w-36 shrink-0 font-medium">Performance bonds</span>
+              <span class="text-amber-700 font-medium">TWO bonds × 10% each <span class="rfp-cite cursor-help text-cyan-500 ml-0.5 font-normal" data-cite="bond_01">ℹ</span></span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gray-400 w-36 shrink-0 font-medium">Post-go-live</span>
+              <span>12 months warranty, 40 pd/qtr included <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="warranty">ℹ</span></span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gray-400 w-36 shrink-0 font-medium">Data residency</span>
+              <span>Sri Lanka datacenters only <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="data_residency">ℹ</span></span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gray-400 w-36 shrink-0 font-medium">Vendor lock-in</span>
+              <span class="text-red-700 font-medium">Strictly prohibited = grounds for disqualification <span class="rfp-cite cursor-help text-cyan-500 ml-0.5 font-normal" data-cite="no_vendor_lock">ℹ</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Eligibility Snapshot ───────────────────────────────────── -->
+      <section class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h2 class="font-bold text-gray-900 text-sm mb-4">Firm Eligibility — Mandatory Requirements</h2>
+        <div class="grid md:grid-cols-2 gap-2 text-xs text-gray-700">
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50">
+            <span class="text-green-500 mt-0.5">●</span>
+            <span>Legally registered &amp; operating in Sri Lanka
+              <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="liquidity_req">ℹ</span>
+            </span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50">
+            <span class="text-green-500 mt-0.5">●</span>
+            <span>Average annual turnover ≥ USD 2.5M (last 3 years)
+              <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="turnover_req">ℹ</span>
+            </span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50">
+            <span class="text-green-500 mt-0.5">●</span>
+            <span>Liquidity ratio ≥ 1 (last 2 years audited accounts)
+              <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="liquidity_req">ℹ</span>
+            </span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50">
+            <span class="text-green-500 mt-0.5">●</span>
+            <span>10+ years cumulative software development experience
+              <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="experience_req">ℹ</span>
+            </span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50">
+            <span class="text-green-500 mt-0.5">●</span>
+            <span>5+ years large-scale ICT integration (national/enterprise)
+              <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="experience_req">ℹ</span>
+            </span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50">
+            <span class="text-green-500 mt-0.5">●</span>
+            <span>At least 1 completed digital health project (documented)
+              <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="digital_health_req">ℹ</span>
+            </span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50">
+            <span class="text-green-500 mt-0.5">●</span>
+            <span>At least 1 Sri Lankan govt / UN / donor-funded project (last 5 years)
+              <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="digital_health_req">ℹ</span>
+            </span>
+          </div>
+          <div class="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-50">
+            <span class="text-green-500 mt-0.5">●</span>
+            <span>15+ key personnel, all full-time in Sri Lanka, all direct staff
+              <span class="rfp-cite cursor-help text-cyan-500 ml-0.5" data-cite="staff_sri_lanka">ℹ</span>
+            </span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <a href="risks.html" class="text-xs text-blue-600 hover:underline font-medium">→ See full risk analysis and eligibility checklist</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    initNav('overview');
+    initTooltips();
+  </script>
+</body>
+</html>
