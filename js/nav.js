@@ -14,7 +14,7 @@ function initNav(activePage) {
   if (!navContainer) return;
 
   navContainer.innerHTML = `
-    <aside class="fixed top-0 left-0 h-screen w-60 bg-slate-900 flex flex-col z-50 overflow-y-auto">
+    <aside id="sidebar" class="fixed top-0 left-0 h-screen w-60 bg-slate-900 flex flex-col z-50 overflow-y-auto -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out">
       <div class="p-5 border-b border-slate-700/60">
         <div class="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-1">UNOPS RFP/2026/61570</div>
         <div class="text-white font-bold text-sm leading-snug">RFP Analysis<br>Dashboard</div>
@@ -39,7 +39,56 @@ function initNav(activePage) {
         <div class="text-amber-400 text-[11px] font-semibold mt-1.5">⏰ Hard deadline: Dec 2026</div>
       </div>
     </aside>
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
   `;
+
+  // Hamburger button — visible only on mobile
+  const hamburger = document.createElement('button');
+  hamburger.id = 'hamburger-btn';
+  hamburger.className = 'fixed top-3 left-3 z-[60] md:hidden bg-slate-900 text-white p-2.5 rounded-lg shadow-lg';
+  hamburger.setAttribute('aria-label', 'Toggle menu');
+  hamburger.innerHTML = hamburgerIcon();
+  document.body.appendChild(hamburger);
+
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+
+  function hamburgerIcon() {
+    return `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>`;
+  }
+
+  function closeIcon() {
+    return `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+    </svg>`;
+  }
+
+  function openSidebar() {
+    sidebar.classList.remove('-translate-x-full');
+    overlay.classList.remove('hidden');
+    hamburger.innerHTML = closeIcon();
+  }
+
+  function closeSidebar() {
+    sidebar.classList.add('-translate-x-full');
+    overlay.classList.add('hidden');
+    hamburger.innerHTML = hamburgerIcon();
+  }
+
+  hamburger.addEventListener('click', () => {
+    sidebar.classList.contains('-translate-x-full') ? openSidebar() : closeSidebar();
+  });
+
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar when a nav link is tapped on mobile
+  sidebar.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (window.innerWidth < 768) closeSidebar();
+    });
+  });
 }
 
 function initTooltips() {
@@ -47,11 +96,11 @@ function initTooltips() {
   const tip = document.createElement('div');
   tip.id = 'rfp-tooltip';
   tip.className = [
-    'fixed z-[9999] max-w-xs bg-gray-900 text-white rounded-xl shadow-2xl p-3.5',
+    'fixed z-[9999] bg-gray-900 text-white rounded-xl shadow-2xl p-3.5',
     'text-xs border border-gray-700 pointer-events-none',
     'transition-opacity duration-150 opacity-0'
   ].join(' ');
-  tip.style.maxWidth = '320px';
+  tip.style.maxWidth = '260px';
   tip.innerHTML = `
     <div class="flex items-center gap-1.5 mb-2">
       <span class="text-sm">📄</span>
@@ -77,7 +126,7 @@ function initTooltips() {
     tip.style.opacity = '0';
     tip.style.display = 'block';
     const rect   = el.getBoundingClientRect();
-    const tW     = 320;
+    const tW     = 260;
     const tH     = tip.offsetHeight || 140;
     let left     = rect.left;
     let top      = rect.bottom + 6;

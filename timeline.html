@@ -27,8 +27,13 @@
     .gantt-container { overflow-x: auto; }
     .gantt-grid {
       display: grid;
-      grid-template-columns: 200px repeat(30, minmax(28px, 1fr));
-      min-width: 1100px;
+      grid-template-columns: 200px repeat(30, minmax(20px, 1fr));
+      min-width: 800px;
+    }
+    @media (max-width: 768px) {
+      .gantt-grid {
+        grid-template-columns: 140px repeat(30, minmax(20px, 1fr));
+      }
     }
     .gantt-header-row {
       display: contents;
@@ -119,15 +124,15 @@
 
   <div id="nav-container"></div>
 
-  <main class="ml-60 min-h-screen">
+  <main class="ml-0 md:ml-60 min-h-screen">
     <!-- Page header -->
-    <div class="bg-white border-b border-slate-200 px-8 py-6">
+    <div class="bg-white border-b border-slate-200 px-4 md:px-8 py-6">
       <div class="text-xs text-slate-400 font-semibold uppercase tracking-widest mb-1">RFP/2026/61570 · Bundle 2</div>
       <h1 class="text-2xl font-bold text-slate-900">Timeline &amp; Gantt Chart</h1>
       <p class="text-slate-500 text-sm mt-1">30-week delivery schedule, 8 deliverables, payment milestones, and critical path</p>
     </div>
 
-    <div class="px-8 py-6 space-y-6">
+    <div class="px-4 md:px-8 py-6 space-y-6">
 
       <!-- Hard deadline banner -->
       <div class="bg-red-900 rounded-xl p-4 flex items-center gap-3">
