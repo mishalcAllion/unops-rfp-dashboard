@@ -630,6 +630,15 @@
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       document.getElementById('tab-' + tabId).classList.add('active');
     });
+
+    // Auto-activate tab from URL hash (e.g. systems.html#nehr)
+    (function() {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const btn = document.querySelector(`.tab-btn[data-tab="${hash}"]`);
+        if (btn) btn.click();
+      }
+    })();
   </script>
 </body>
 </html>
