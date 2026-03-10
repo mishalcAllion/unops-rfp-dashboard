@@ -45,7 +45,7 @@
     <div class="bg-white border-b border-slate-200 px-4 md:px-8 py-6">
       <div class="text-xs text-slate-400 font-semibold uppercase tracking-widest mb-1">RFP/2026/61570 · Bundle 2</div>
       <h1 class="text-2xl font-bold text-slate-900">Systems Breakdown</h1>
-      <p class="text-slate-500 text-sm mt-1">Detailed functional and non-functional requirements for each of the 5 core systems</p>
+      <p class="text-slate-500 text-sm mt-1">Detailed functional and non-functional requirements for all 7 systems &amp; modules</p>
     </div>
 
     <div class="px-4 md:px-8 py-6">
@@ -76,6 +76,12 @@
           <button class="tab-btn flex items-center gap-2 px-5 py-3.5 text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-50 transition-colors" data-tab="ereferral">
             <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> <span class="hidden sm:inline">e-Referral</span><span class="sm:hidden">Referral</span>
           </button>
+          <button class="tab-btn flex items-center gap-2 px-5 py-3.5 text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-50 transition-colors" data-tab="pam">
+            <span class="w-2 h-2 rounded-full bg-rose-500 inline-block"></span> <span class="hidden sm:inline">Patient Access</span><span class="sm:hidden">PAM</span>
+          </button>
+          <button class="tab-btn flex items-center gap-2 px-5 py-3.5 text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-50 transition-colors" data-tab="cc">
+            <span class="w-2 h-2 rounded-full bg-slate-500 inline-block"></span> <span class="hidden sm:inline">Common Req.</span><span class="sm:hidden">CC</span>
+          </button>
         </div>
 
         <!-- ── TAB 1: NEHR ──────────────────────────────────────────────────── -->
@@ -83,7 +89,7 @@
           <div class="flex items-start justify-between mb-4">
             <div>
               <div class="flex items-center gap-3 mb-2">
-                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 1 of 5</span>
+                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 1 of 7</span>
                 <span class="rfp-cite" data-cite="nehr_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
               </div>
               <h2 class="text-xl font-bold text-slate-900">National Electronic Health Record (NEHR)</h2>
@@ -186,7 +192,7 @@
           <div class="flex items-start justify-between mb-4">
             <div>
               <div class="flex items-center gap-3 mb-2">
-                <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 2 of 5</span>
+                <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 2 of 7</span>
                 <span class="rfp-cite" data-cite="nhdx_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
               </div>
               <h2 class="text-xl font-bold text-slate-900">National Health Data Exchange (NHDX) + API Manager</h2>
@@ -273,7 +279,7 @@
           <div class="flex items-start justify-between mb-4">
             <div>
               <div class="flex items-center gap-3 mb-2">
-                <span class="bg-violet-100 text-violet-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 3 of 5</span>
+                <span class="bg-violet-100 text-violet-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 3 of 7</span>
                 <span class="rfp-cite" data-cite="idp_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
               </div>
               <h2 class="text-xl font-bold text-slate-900">Identity Provider (IdP)</h2>
@@ -353,7 +359,7 @@
           <div class="flex items-start justify-between mb-4">
             <div>
               <div class="flex items-center gap-3 mb-2">
-                <span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 4 of 5</span>
+                <span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 4 of 7</span>
                 <span class="rfp-cite" data-cite="terminology_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
               </div>
               <h2 class="text-xl font-bold text-slate-900">Terminology Services + Medication &amp; Device Registry</h2>
@@ -441,7 +447,7 @@
           <div class="flex items-start justify-between mb-4">
             <div>
               <div class="flex items-center gap-3 mb-2">
-                <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 5 of 5</span>
+                <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">System 5 of 7</span>
                 <span class="rfp-cite" data-cite="ereferral_definition"><span class="cite-icon">ℹ</span> RFP §2</span>
               </div>
               <h2 class="text-xl font-bold text-slate-900">e-Referral System + Appointment Management</h2>
@@ -513,6 +519,139 @@
             </div>
           </div>
         </div>
+        <!-- ── TAB 6: Patient/Clinician Access Module ───────────────────────── -->
+        <div class="tab-panel p-6" id="tab-pam">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="bg-rose-100 text-rose-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Module 6</span>
+                <span class="rfp-cite" data-cite="nehr_patient_access"><span class="cite-icon">ℹ</span> RFP §2</span>
+              </div>
+              <h2 class="text-xl font-bold text-slate-900">Patient/Clinician Access Module</h2>
+              <p class="text-slate-500 text-sm mt-1">Responsive web app for patient self-service and EMR-embeddable clinician view of NEHR data</p>
+            </div>
+            <div class="flex flex-col gap-1.5 text-right">
+              <span class="chip bg-rose-50 text-rose-700 border border-rose-200">35 FRs</span>
+              <span class="chip bg-slate-100 text-slate-600 border border-slate-200">SMART on FHIR</span>
+            </div>
+          </div>
+
+          <div class="bg-rose-50 border border-rose-200 rounded-xl p-4 mb-6">
+            <div class="text-xs font-semibold text-rose-600 uppercase tracking-wider mb-2">What it does</div>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              A responsive web application enabling patients to view health records, manage consent, generate PHNs, maintain health diaries, and share International Patient Summaries via SMART Health Links. Includes an EMR-embeddable clinician view with advanced visualizations (e.g., superimposing medications on blood pressure trends). Supports WCAG 2.1 AA accessibility and multilingual (Sinhala/Tamil) content.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Functional Requirements</h3>
+              <div id="accordion-PAM" class="mt-1"></div>
+            </div>
+
+            <div class="space-y-5">
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Key Capabilities</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="chip bg-rose-50 text-rose-700 border border-rose-200">Patient Portal</span>
+                  <span class="chip bg-rose-50 text-rose-700 border border-rose-200">Clinician View</span>
+                  <span class="chip bg-rose-50 text-rose-700 border border-rose-200">PHN Mgmt</span>
+                  <span class="chip bg-rose-50 text-rose-700 border border-rose-200">Consent UI</span>
+                  <span class="chip bg-rose-50 text-rose-700 border border-rose-200">Health Diaries</span>
+                  <span class="chip bg-rose-50 text-rose-700 border border-rose-200">IPS</span>
+                  <span class="chip bg-rose-50 text-rose-700 border border-rose-200">SMART Health Links</span>
+                </div>
+              </div>
+
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Key Integrations</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="chip bg-blue-50 text-blue-700 border border-blue-200">NEHR</span>
+                  <span class="chip bg-violet-50 text-violet-700 border border-violet-200">Identity Provider</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">Client Registry</span>
+                  <span class="chip bg-slate-100 text-slate-600 border border-slate-200">SLUDI</span>
+                  <span class="chip bg-emerald-50 text-emerald-700 border border-emerald-200">e-Referral</span>
+                </div>
+              </div>
+
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wide mb-3">⚠ Special Considerations</h3>
+                <ul class="space-y-1.5 text-xs text-amber-900">
+                  <li>• WCAG 2.1 AA accessibility required for all patient-facing UIs</li>
+                  <li>• Multilingual: Sinhala + Tamil + English</li>
+                  <li>• Must support SMART on FHIR launch for EMR embedding</li>
+                  <li>• Structured Questionnaire authoring (WHO-5, PHQ-9)</li>
+                  <li>• 35 functional requirements across 17 functional areas</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TAB 7: Common Requirements ────────────────────────────────────── -->
+        <div class="tab-panel p-6" id="tab-cc">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <div class="flex items-center gap-3 mb-2">
+                <span class="bg-slate-200 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Cross-Cutting</span>
+              </div>
+              <h2 class="text-xl font-bold text-slate-900">Common Requirements (CC.INT)</h2>
+              <p class="text-slate-500 text-sm mt-1">15 mandatory integration requirements that apply to ALL systems in Bundle 2</p>
+            </div>
+            <div class="flex flex-col gap-1.5 text-right">
+              <span class="chip bg-slate-100 text-slate-700 border border-slate-300">15 FRs</span>
+              <span class="chip bg-red-50 text-red-700 border border-red-200">Mandatory</span>
+            </div>
+          </div>
+
+          <div class="bg-slate-100 border border-slate-300 rounded-xl p-4 mb-6">
+            <div class="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">What it covers</div>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              These are cross-cutting integration obligations for the solution vendor. They mandate integration with nationally provided common services (Certificate Services, APM, SIEM, Audit Repository, Time Keeping, ETL Framework) and prohibit the vendor from building duplicate infrastructure. They also cover data governance for secondary use, de-identification, and change coordination with common service owners.
+            </p>
+          </div>
+
+          <div class="bg-red-50 border border-red-300 rounded-xl p-4 mb-6 flex items-start gap-3">
+            <span class="text-red-500 text-xl mt-0.5">🔴</span>
+            <div>
+              <div class="font-semibold text-red-800 text-sm mb-1">Contractual Obligation — No Duplication Allowed</div>
+              <p class="text-red-700 text-xs leading-relaxed">CC.INT.13 explicitly states: the solution SHALL NOT design, develop, procure, or operate duplicate implementations of certificate management, audit repositories, ETL pipelines, time services, or APM platforms. Violating this is a contractual breach.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">Requirements</h3>
+              <div id="accordion-CC" class="mt-1"></div>
+            </div>
+
+            <div class="space-y-5">
+              <div class="bg-white border border-slate-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Common Services (Bundle 3)</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="chip bg-slate-100 text-slate-700 border border-slate-300">Certificate Services</span>
+                  <span class="chip bg-slate-100 text-slate-700 border border-slate-300">APM Platform</span>
+                  <span class="chip bg-slate-100 text-slate-700 border border-slate-300">SIEM</span>
+                  <span class="chip bg-slate-100 text-slate-700 border border-slate-300">Audit Repository</span>
+                  <span class="chip bg-slate-100 text-slate-700 border border-slate-300">Time Keeping (NTP)</span>
+                  <span class="chip bg-slate-100 text-slate-700 border border-slate-300">ETL Framework</span>
+                  <span class="chip bg-slate-100 text-slate-700 border border-slate-300">DHIW / HMIS</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">These services are provided by Bundle 3 — the vendor must integrate, not duplicate.</p>
+              </div>
+
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                <h3 class="text-xs font-bold text-amber-700 uppercase tracking-wide mb-3">⚠ Key Risks</h3>
+                <ul class="space-y-1.5 text-xs text-amber-900">
+                  <li>• Bundle 3 services may not be ready when Bundle 2 needs them</li>
+                  <li>• No fallback allowed — must wait for or mock national services</li>
+                  <li>• Change coordination across multiple vendors and bundles</li>
+                  <li>• De-identification requirements may evolve during implementation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Common Requirements footer note -->
@@ -520,7 +659,7 @@
         <div class="flex items-start gap-3">
           <span class="text-slate-400 text-lg mt-0.5">📋</span>
           <div>
-            <div class="font-semibold text-white mb-1">Common Requirements (apply to ALL 5 systems)</div>
+            <div class="font-semibold text-white mb-1">Common Requirements (apply to all systems)</div>
             <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs">
               <span>• Must NOT duplicate certificate, audit, APM, or ETL services <span class="rfp-cite" data-cite="cc_no_duplication"><span class="cite-icon">ℹ</span> CC.INT.13</span></span>
               <span>• Integrate with nationally provided Certificate Services <span class="rfp-cite" data-cite="cc_cert_integration"><span class="cite-icon">ℹ</span> CC.INT.01</span></span>
@@ -537,6 +676,7 @@
   </main>
 
   <script src="js/requirements-data.js"></script>
+  <script src="js/nfr-data.js"></script>
   <script src="js/citations.js"></script>
   <script src="js/nav.js"></script>
   <script>
@@ -607,6 +747,8 @@
     renderAccordion('IDP', 'accordion-IDP');
     renderAccordion('TS', 'accordion-TS');
     renderAccordion('ER', 'accordion-ER');
+    renderAccordion('PAM', 'accordion-PAM');
+    renderAccordion('CC', 'accordion-CC');
 
     // Init tooltips after accordions are rendered (covers both static + dynamic rfp-cite elements)
     initTooltips();

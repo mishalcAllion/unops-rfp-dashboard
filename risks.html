@@ -41,12 +41,12 @@
       <!-- Risk summary header -->
       <div class="grid grid-cols-3 gap-4">
         <div class="bg-red-600 text-white rounded-xl p-5 shadow-sm">
-          <div class="text-3xl font-bold">5</div>
+          <div class="text-3xl font-bold">7</div>
           <div class="text-red-200 text-sm font-semibold mt-1">HIGH severity risks</div>
           <div class="text-red-300 text-xs mt-0.5">Potential to derail bid or project delivery</div>
         </div>
         <div class="bg-amber-500 text-white rounded-xl p-5 shadow-sm">
-          <div class="text-3xl font-bold">5</div>
+          <div class="text-3xl font-bold">8</div>
           <div class="text-amber-100 text-sm font-semibold mt-1">MEDIUM severity risks</div>
           <div class="text-amber-200 text-xs mt-0.5">Manageable with planning and negotiation</div>
         </div>
@@ -290,6 +290,113 @@
         </div>
       </div>
 
+      <!-- ── Category: Compliance & Regulatory ──────────────────────────────── -->
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-sm font-bold text-slate-500 uppercase tracking-widest">Compliance &amp; Regulatory Risks</span>
+          <div class="flex-1 h-px bg-slate-200"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div class="bg-white border border-red-200 rounded-xl p-5 shadow-sm">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">HIGH</span>
+              </div>
+              <span class="rfp-cite" data-cite="pdpa_compliance"><span class="cite-icon">ℹ</span> §11 PDPA</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm mb-2">PDPA (Personal Data Protection Act) Compliance</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              The system processes highly sensitive patient health data and must comply with Sri Lanka's Personal Data Protection Act. PDPA requirements span data collection, consent, storage, cross-border transfers, breach notification, and the right to erasure. Non-compliance risks legal penalties and could halt the entire project.
+            </p>
+            <div class="bg-slate-50 rounded-lg p-3 border border-slate-200">
+              <div class="text-xs font-semibold text-slate-600 mb-1">Mitigation</div>
+              <p class="text-xs text-slate-500">Engage a Sri Lankan data protection legal advisor early. Build PDPA compliance into the architecture from day 1 — consent management, data minimization, audit trails, and right-to-erasure workflows. Document compliance in the Inception Report.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-red-200 rounded-xl p-5 shadow-sm">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">HIGH</span>
+              </div>
+              <span class="rfp-cite" data-cite="staff_sri_lanka"><span class="cite-icon">ℹ</span> §7 Staffing</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm mb-2">Staffing Shortfall — 15+ Certified Specialists Required</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              The RFP mandates 8 specific roles with strict certifications: PMP/PRINCE2 Project Manager, HL7 FHIR-certified Health Informatician, TOGAF Enterprise Architect, CISSP/CISM Security Specialist, ISTQB QA Lead, plus DevOps, Development Lead, and Change Management specialists. All must be full-time, direct employees, physically in Sri Lanka. Finding 15+ people with these specific qualifications in Sri Lanka's market is challenging.
+            </p>
+            <div class="bg-slate-50 rounded-lg p-3 border border-slate-200">
+              <div class="text-xs font-semibold text-slate-600 mb-1">Mitigation</div>
+              <p class="text-xs text-slate-500">Begin recruitment immediately if deciding to bid. Verify that existing staff hold required certifications (PMP, TOGAF, CISSP, ISTQB, HL7). Budget for certification training if current staff are close but not yet certified.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Category: Scope & Delivery ──────────────────────────────────────── -->
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-sm font-bold text-slate-500 uppercase tracking-widest">Scope &amp; Delivery Risks</span>
+          <div class="flex-1 h-px bg-slate-200"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div class="bg-white border border-amber-200 rounded-xl p-5 shadow-sm">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">MEDIUM</span>
+              </div>
+              <span class="rfp-cite" data-cite="nehr_patient_access"><span class="cite-icon">ℹ</span> Annex 2 PAM</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm mb-2">Patient/Clinician Access Module — Full Consumer-Grade Web App</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              The RFP defines 35 functional requirements for a patient-facing responsive web portal including self-registration, health record viewing, health diaries, structured questionnaires (WHO-5, PHQ-9), IPS generation, SMART Health Links, and a clinician EMR-embeddable view. This is essentially a separate consumer-grade application with its own UX, accessibility (WCAG 2.1 AA), and trilingual requirements — on top of the 5 core backend systems.
+            </p>
+            <div class="bg-slate-50 rounded-lg p-3 border border-slate-200">
+              <div class="text-xs font-semibold text-slate-600 mb-1">Mitigation</div>
+              <p class="text-xs text-slate-500">Treat PAM as a distinct workstream with dedicated UX/frontend resources. Propose a phased PAM delivery in the Inception Report — basic portal for MVP, advanced features (IPS, SMART Health Links, questionnaires) post-MVP.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-amber-200 rounded-xl p-5 shadow-sm">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">MEDIUM</span>
+              </div>
+              <span class="rfp-cite" data-cite="warranty_obligation"><span class="cite-icon">ℹ</span> §8 Warranty</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm mb-2">12-Month Post-Go-Live Warranty &amp; SLA Obligations</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              After Go-Live acceptance, the vendor must provide 12 months of warranty support including bug fixes, security patches, and SLA compliance. Bond 02 (10% of contract value) remains held through this entire warranty period. This means the vendor has financial exposure for ~18 months total (30 weeks development + 12 months warranty) — well beyond the delivery phase.
+            </p>
+            <div class="bg-slate-50 rounded-lg p-3 border border-slate-200">
+              <div class="text-xs font-semibold text-slate-600 mb-1">Mitigation</div>
+              <p class="text-xs text-slate-500">Price warranty support into the bid from day 1. Plan for a small retained support team post-delivery. Negotiate clear SLA metrics and severity definitions in the Inception Report to avoid ambiguous warranty claims.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-amber-200 rounded-xl p-5 shadow-sm">
+            <div class="flex items-start justify-between mb-3">
+              <div>
+                <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">MEDIUM</span>
+              </div>
+              <span class="rfp-cite" data-cite="common_requirements"><span class="cite-icon">ℹ</span> Annex 2 CC</span>
+            </div>
+            <h3 class="font-bold text-slate-900 text-sm mb-2">Cross-Cutting Integration Requirements (CC.INT.01–15)</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-3">
+              The RFP defines 15 common requirements that apply across ALL systems: certificate/PKI services, APM, SIEM integration, centralized audit (IHE ATNA), NTP sync, ETL framework, data warehouse feeds, de-identification services, Bundle 1 system integration, and environment provisioning. These are easy to underestimate because they don't belong to any single system — but they represent significant cross-cutting infrastructure work.
+            </p>
+            <div class="bg-slate-50 rounded-lg p-3 border border-slate-200">
+              <div class="text-xs font-semibold text-slate-600 mb-1">Mitigation</div>
+              <p class="text-xs text-slate-500">Assign a dedicated DevOps/platform engineer to own cross-cutting integrations. Map each CC.INT requirement to a delivery milestone. Flag external dependencies (SIEM, APM, PKI) that require MoH infrastructure readiness.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <!-- ── Eligibility section ───────────────────────────────────────────── -->
       <div>
         <div class="flex items-center gap-3 mb-3">
@@ -408,7 +515,7 @@
         </div>
         <div class="mt-5 pt-4 border-t border-slate-700">
           <p class="text-sm text-slate-300 leading-relaxed">
-            This is a <strong class="text-white">high-value, high-visibility, high-risk tender</strong>. The scope is large (5 interconnected national-scale systems), the timeline is aggressive (30 weeks), and the requirements are detailed (100+ functional requirements in Annex 2). If Allion Tech meets the eligibility criteria and has the right team and experience — this is a marquee project with 12 months of built-in post-delivery maintenance and strong precedent for follow-on work across the broader DHP (17 components total).
+            This is a <strong class="text-white">high-value, high-visibility, high-risk tender</strong>. The scope is large (5 core systems + 2 cross-cutting modules, ~186 functional requirements + 90 non-functional requirements), the timeline is aggressive (30 weeks + 12-month warranty), and the compliance bar is high (PDPA, SLCERT, IHE profiles, WCAG 2.1 AA). If Allion Tech meets the eligibility criteria and has the right team — this is a marquee project with strong precedent for follow-on work across the broader DHP (17 components total).
           </p>
         </div>
       </div>

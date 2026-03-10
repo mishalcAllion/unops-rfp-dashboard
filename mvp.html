@@ -59,8 +59,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
             <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">MVP Components</div>
-            <div class="text-lg font-bold text-slate-900">All 5 Systems</div>
-            <div class="text-xs text-slate-500 mt-1">NEHR, NHDX, IdP, Terminology, e-Referral</div>
+            <div class="text-lg font-bold text-slate-900">All 7 Systems &amp; Modules</div>
+            <div class="text-xs text-slate-500 mt-1">NEHR, NHDX, IdP, Terminology, e-Referral + Patient Access, Common Req's</div>
           </div>
           <div class="bg-amber-50 rounded-xl p-4 border border-amber-200">
             <div class="text-xs font-semibold text-amber-600 uppercase tracking-wide mb-1">MVP Due</div>
@@ -85,7 +85,7 @@
               <div class="bg-amber-100 rounded-lg p-3">
                 <div class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-1.5">🍕 "Thin Slice" — the project selection</div>
                 <p class="text-amber-900 text-xs leading-relaxed">
-                  Sri Lanka's DHP blueprint has <strong>17 components</strong> total. This RFP selects only <strong>5 of them</strong> (NEHR, NHDX, IdP, Terminology, e-Referral) for initial delivery — hence "thin slice" of the full platform. This is the procurement scope decision at the programme level, not an MVP definition.
+                  Sri Lanka's DHP blueprint has <strong>17 components</strong> total. This RFP selects <strong>5 core systems</strong> (NEHR, NHDX, IdP, Terminology, e-Referral) plus cross-cutting modules (Patient Access, Common Requirements) for initial delivery — hence "thin slice" of the full platform. This is the procurement scope decision at the programme level, not an MVP definition.
                 </p>
               </div>
               <div class="bg-amber-100 rounded-lg p-3">
@@ -349,6 +349,79 @@
             </div>
           </div>
 
+          <!-- Patient/Clinician Access Module -->
+          <div class="border border-slate-200 rounded-xl overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3 bg-rose-50 border-b border-slate-200">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+              <span class="font-bold text-slate-800 text-sm">Patient/Clinician Access Module</span>
+            </div>
+            <div class="grid grid-cols-2 divide-x divide-slate-200">
+              <div class="p-4">
+                <div class="text-xs font-bold text-green-700 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-green-500"></span> MVP Scope (Target)
+                </div>
+                <ul class="space-y-1.5 text-xs text-slate-700">
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> Responsive web portal for patient self-registration</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> PHN lookup and basic profile management</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> Health record viewing (encounters, lab results, medications)</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> Basic consent management UI</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> Audit trail of all patient data access</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> Authentication via IdP (NIC/passport verification)</li>
+                </ul>
+              </div>
+              <div class="p-4">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-slate-400"></span> Post-MVP / Full Scope
+                </div>
+                <ul class="space-y-1.5 text-xs text-slate-500">
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> Health diary / personal health records entry</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> Structured questionnaires (WHO-5, PHQ-9)</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> International Patient Summary (IPS) generation</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> SMART Health Links for patient-controlled sharing</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> Clinician EMR-embeddable view (SMART on FHIR launch)</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> Dependent/guardianship management</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> WCAG 2.1 AA accessibility compliance</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Common Requirements -->
+          <div class="border border-slate-200 rounded-xl overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3 bg-slate-100 border-b border-slate-200">
+              <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
+              <span class="font-bold text-slate-800 text-sm">Common Requirements (Cross-Cutting)</span>
+            </div>
+            <div class="grid grid-cols-2 divide-x divide-slate-200">
+              <div class="p-4">
+                <div class="text-xs font-bold text-green-700 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-green-500"></span> MVP Scope (Target)
+                </div>
+                <ul class="space-y-1.5 text-xs text-slate-700">
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> NTP time synchronization across all services</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> Centralized audit logging (IHE ATNA foundation)</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> Environment provisioning (Dev/Test/Staging/Prod)</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> Data backup and disaster recovery baseline</li>
+                  <li class="flex items-start gap-1.5"><span class="text-green-500 mt-0.5">✓</span> No-duplication / master data governance rules</li>
+                </ul>
+              </div>
+              <div class="p-4">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-slate-400"></span> Post-MVP / Full Scope
+                </div>
+                <ul class="space-y-1.5 text-xs text-slate-500">
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> Certificate Services / PKI integration</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> APM integration for application performance monitoring</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> SIEM integration for security event forwarding</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> ETL Framework / DHIW data feeds</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> De-identification / anonymization services</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> Bundle 1 system integration (ePIMS, AMC, LeIS)</li>
+                  <li class="flex items-start gap-1.5"><span class="mt-0.5">→</span> National health data dictionary conformance</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -435,7 +508,7 @@
           <div>
             <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">What Allion Tech should demonstrate</div>
             <ul class="space-y-1.5 text-slate-700 text-xs">
-              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> All 5 systems deployable and running in a staging environment</li>
+              <li class="flex items-start gap-2"><span class="text-green-500">✓</span> All systems deployable and running in a staging environment</li>
               <li class="flex items-start gap-2"><span class="text-green-500">✓</span> Core FHIR APIs returning correct responses</li>
               <li class="flex items-start gap-2"><span class="text-green-500">✓</span> Basic end-to-end flow: patient record creation → retrieval → referral</li>
               <li class="flex items-start gap-2"><span class="text-green-500">✓</span> Automated CI/CD pipeline running builds and tests</li>
@@ -478,10 +551,11 @@
 
     function renderMvpAccordion(containerId) {
       const container = document.getElementById(containerId);
-      const systemKeys = ['NEHR', 'NHDX', 'IDP', 'TS', 'ER'];
+      const systemKeys = ['NEHR', 'NHDX', 'IDP', 'TS', 'ER', 'PAM', 'CC'];
       const dotColors = {
         NEHR: 'bg-blue-500', NHDX: 'bg-indigo-500',
-        IDP: 'bg-violet-500', TS: 'bg-teal-500', ER: 'bg-emerald-500'
+        IDP: 'bg-violet-500', TS: 'bg-teal-500', ER: 'bg-emerald-500',
+        PAM: 'bg-rose-500', CC: 'bg-slate-500'
       };
       let html = '<div class="space-y-5">';
       systemKeys.forEach(key => {

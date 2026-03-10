@@ -1,11 +1,12 @@
-// requirements-data.js — All 136 FRs from RFP/2026/61570, Annex 2
+// requirements-data.js — All functional requirements from RFP/2026/61570, Annex 2
 // Structured by system → functional area → individual requirement
 // mvp: true = Allion Tech's recommended MVP scope (confirmed in Inception Report, Week 4)
+// Includes: NEHR (35 FRs), PAM (35 FRs), NHDX (17 FRs), IDP (28 FRs), TS (18 FRs), ER (38 FRs), CC (15 FRs) = 186 total
 
 const rfpRequirements = {
 
   // ─────────────────────────────────────────────────────────────────────────
-  // NEHR — National Electronic Health Record (34 FRs)
+  // NEHR — National Electronic Health Record (35 FRs)
   // ─────────────────────────────────────────────────────────────────────────
   NEHR: {
     label: 'National Electronic Health Record',
@@ -976,7 +977,7 @@ const rfpRequirements = {
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // ER — e-Referral System with Appointment Management (39 FRs)
+  // ER — e-Referral System with Appointment Management (38 FRs)
   // ─────────────────────────────────────────────────────────────────────────
   ER: {
     label: 'e-Referral & Appointment Management',
@@ -1315,6 +1316,530 @@ const rfpRequirements = {
             mvp: false,
             cite: null,
             desc: 'The system shall support export of referral and appointment data in CSV and JSON formats for external analysis, MoH reporting, and integration with national health analytics platforms.'
+          }
+        ]
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PAM — Patient/Clinician Access Module (35 FRs)
+  // ─────────────────────────────────────────────────────────────────────────
+  PAM: {
+    label: 'Patient/Clinician Access Module',
+    color: 'rose',
+    areas: [
+      {
+        id: 'pam-access',
+        label: 'User Access & Channels',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.01',
+            title: 'Responsive Web Application',
+            mvp: true,
+            cite: 'nehr_patient_access',
+            desc: 'Patient-facing web application accessible on mobile, tablet, and desktop browsers, designed for usability, accessibility, and multilingual support.'
+          },
+          {
+            id: 'PAM.FN.02',
+            title: 'Patient View for NEHR Data',
+            mvp: true,
+            cite: 'nehr_patient_access',
+            desc: 'Patient access view should be developed for the NEHR data.'
+          }
+        ]
+      },
+      {
+        id: 'pam-auth',
+        label: 'Authentication & Identity',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.03',
+            title: 'IDP-based Authentication',
+            mvp: true,
+            cite: null,
+            desc: 'Authentication using the national Identity Provider (SLUDI), initially via sandbox and subsequently migrated to production.'
+          },
+          {
+            id: 'PAM.FN.04',
+            title: 'Self-Registration',
+            mvp: true,
+            cite: null,
+            desc: 'Support self-registration workflows aligned with national identity policies and identity proofing mechanisms.'
+          }
+        ]
+      },
+      {
+        id: 'pam-demographics',
+        label: 'Demographics & Profile',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.05',
+            title: 'Patient Profile Management',
+            mvp: true,
+            cite: null,
+            desc: 'Capture and manage demographic and socio-economic attributes such as education, employment, income status, and related metadata.'
+          },
+          {
+            id: 'PAM.FN.06',
+            title: 'Patient Origin Data',
+            mvp: false,
+            cite: null,
+            desc: 'Capture and manage patient origin and contextual data for analytics and service planning.'
+          }
+        ]
+      },
+      {
+        id: 'pam-phn',
+        label: 'PHN Management',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.07',
+            title: 'PHN Generation',
+            mvp: true,
+            cite: null,
+            desc: 'Generate Personal Health Numbers (PHN) through interaction with the Client Registry.'
+          },
+          {
+            id: 'PAM.FN.08',
+            title: 'PHN Claim Process',
+            mvp: true,
+            cite: null,
+            desc: 'Allow patients to claim existing PHNs issued through other systems.'
+          },
+          {
+            id: 'PAM.FN.09',
+            title: 'Multiple PHN Handling',
+            mvp: false,
+            cite: null,
+            desc: 'Detect, manage, and reconcile multiple PHNs where applicable, in accordance with national policy.'
+          }
+        ]
+      },
+      {
+        id: 'pam-dashboard',
+        label: 'Dashboard & Visualization',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.10',
+            title: 'Patient Dashboard',
+            mvp: true,
+            cite: null,
+            desc: 'Provide a dashboard summarizing the current health status of the patient.'
+          },
+          {
+            id: 'PAM.FN.11',
+            title: 'Salient Clinical Indicators',
+            mvp: true,
+            cite: null,
+            desc: 'Display allergies/intolerances, current medications, active health problems, pending referrals, and upcoming appointments at a glance.'
+          }
+        ]
+      },
+      {
+        id: 'pam-records',
+        label: 'Health Record Viewing',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.12',
+            title: 'Timeline View',
+            mvp: true,
+            cite: null,
+            desc: 'Present patient records in a chronological timeline view across encounters and facilities.'
+          },
+          {
+            id: 'PAM.FN.13',
+            title: 'Record Drill-down',
+            mvp: true,
+            cite: null,
+            desc: 'Allow users to drill into individual summary records for detailed review.'
+          },
+          {
+            id: 'PAM.FN.14',
+            title: 'Record Filtering',
+            mvp: true,
+            cite: null,
+            desc: 'Enable filtering of records by type, time period, facility, or episode of care.'
+          }
+        ]
+      },
+      {
+        id: 'pam-dependents',
+        label: 'Dependents & Guardianship',
+        mvp: false,
+        requirements: [
+          {
+            id: 'PAM.FN.15',
+            title: 'Dependent Management',
+            mvp: false,
+            cite: null,
+            desc: 'Support adding, editing, removing, and viewing dependent profiles (e.g., children, elderly).'
+          },
+          {
+            id: 'PAM.FN.16',
+            title: 'Guardianship Transfer',
+            mvp: false,
+            cite: null,
+            desc: 'Enable transfer of guardianship and delegation of access rights in accordance with policy.'
+          }
+        ]
+      },
+      {
+        id: 'pam-consent',
+        label: 'Consent Management',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.17',
+            title: 'Granular Consent Controls',
+            mvp: true,
+            cite: null,
+            desc: 'Support consent at multiple levels including per-request, facility, provider, episode of care, and PHN.'
+          },
+          {
+            id: 'PAM.FN.18',
+            title: 'Consent Approval Workflow',
+            mvp: true,
+            cite: null,
+            desc: 'Allow explicit approval of individual data-sharing requests when consent is per-request.'
+          },
+          {
+            id: 'PAM.FN.19',
+            title: 'Consent Configuration',
+            mvp: false,
+            cite: null,
+            desc: 'Enable configurable consent defaults and policies through administrative controls.'
+          }
+        ]
+      },
+      {
+        id: 'pam-curated',
+        label: 'Patient-Curated Data',
+        mvp: false,
+        requirements: [
+          {
+            id: 'PAM.FN.20',
+            title: 'Health Diaries',
+            mvp: false,
+            cite: null,
+            desc: 'Allow patients to maintain curated health data such as asthma diaries, blood pressure logs, and fitness records.'
+          },
+          {
+            id: 'PAM.FN.21',
+            title: 'Structured Questionnaires',
+            mvp: false,
+            cite: null,
+            desc: 'Capture patient-entered data using HL7 FHIR Structured Questionnaires where feasible. Allow for Structured Questionnaire authoring support.'
+          }
+        ]
+      },
+      {
+        id: 'pam-analytics',
+        label: 'Analytics & Trends',
+        mvp: false,
+        requirements: [
+          {
+            id: 'PAM.FN.22',
+            title: 'Trend Visualizations',
+            mvp: false,
+            cite: null,
+            desc: 'Generate trend graphs (e.g., blood pressure, blood glucose) using NEHR data and patient-entered structured data.'
+          },
+          {
+            id: 'PAM.FN.23',
+            title: 'Advanced Visualizations',
+            mvp: false,
+            cite: null,
+            desc: 'Support configurable and extensible visual analytics features subject to administrative enablement.'
+          }
+        ]
+      },
+      {
+        id: 'pam-summaries',
+        label: 'Clinical Summaries & Sharing',
+        mvp: false,
+        requirements: [
+          {
+            id: 'PAM.FN.24',
+            title: 'International Patient Summary (IPS)',
+            mvp: false,
+            cite: null,
+            desc: 'Generate patient summaries conforming to the International Patient Summary (IPS) specification.'
+          },
+          {
+            id: 'PAM.FN.25',
+            title: 'SMART Health Links',
+            mvp: false,
+            cite: null,
+            desc: 'Enable secure sharing of patient summaries using FHIR SMART Health Links or equivalent mechanisms.'
+          }
+        ]
+      },
+      {
+        id: 'pam-audit',
+        label: 'Audit & Transparency',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.26',
+            title: 'Access Logs',
+            mvp: true,
+            cite: null,
+            desc: 'Allow patients to view logs of data access by facilities and healthcare providers.'
+          },
+          {
+            id: 'PAM.FN.27',
+            title: 'Activity History',
+            mvp: true,
+            cite: null,
+            desc: 'Maintain visibility into consent changes and data-sharing activities.'
+          }
+        ]
+      },
+      {
+        id: 'pam-admin',
+        label: 'Administration & Configuration',
+        mvp: false,
+        requirements: [
+          {
+            id: 'PAM.FN.28',
+            title: 'Feature Management',
+            mvp: false,
+            cite: null,
+            desc: 'Admin interface to enable or disable application features such as consent granularity, IPS auto-generation, and visualizations.'
+          },
+          {
+            id: 'PAM.FN.29',
+            title: 'Policy Configuration',
+            mvp: false,
+            cite: null,
+            desc: 'Configure consent models, summarization rules, and data visibility parameters centrally.'
+          }
+        ]
+      },
+      {
+        id: 'pam-interop',
+        label: 'Interoperability & Standards',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.30',
+            title: 'Standards Compliance',
+            mvp: true,
+            cite: null,
+            desc: 'All data access and exchange shall comply with national eHealth standards and international interoperability standards (HL7 FHIR, IPS).'
+          },
+          {
+            id: 'PAM.FN.31',
+            title: 'Notifications',
+            mvp: true,
+            cite: null,
+            desc: 'Allow for targeted health promotion, education material. Reminder on appointments, referrals, etc.'
+          }
+        ]
+      },
+      {
+        id: 'pam-clinician',
+        label: 'Clinician View',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.32',
+            title: 'Clinician View for NEHR Data',
+            mvp: true,
+            cite: null,
+            desc: 'An EMR embeddable view should be developed and be shared for authorized applications. The content of the NEHR view would be similar to the patient view with additional authorisation and privacy controls.'
+          },
+          {
+            id: 'PAM.FN.33',
+            title: 'Advanced Clinician Visualizations',
+            mvp: false,
+            cite: null,
+            desc: 'Support advanced visualizations using data available in the NEHR: e.g., superimposing medications on blood pressure trend graph.'
+          }
+        ]
+      },
+      {
+        id: 'pam-management',
+        label: 'Management',
+        mvp: false,
+        requirements: [
+          {
+            id: 'PAM.FN.34',
+            title: 'Analytics and Dashboards',
+            mvp: false,
+            cite: null,
+            desc: 'Should provide useful analytics and dashboarding to support the management of the module functionality. APIs to access analytics and dashboards from external monitoring systems should be provided.'
+          }
+        ]
+      },
+      {
+        id: 'pam-docs',
+        label: 'Documentation',
+        mvp: true,
+        requirements: [
+          {
+            id: 'PAM.FN.35',
+            title: 'Documentation',
+            mvp: true,
+            cite: null,
+            desc: 'Comprehensive documentation SHALL be provided, including architecture, configuration, terminology lifecycle management, API usage, operational procedures, and troubleshooting guides.'
+          }
+        ]
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // CC — Common Requirements (15 cross-cutting integration requirements)
+  // ─────────────────────────────────────────────────────────────────────────
+  CC: {
+    label: 'Common Requirements',
+    color: 'slate',
+    areas: [
+      {
+        id: 'cc-security',
+        label: 'Certificate & Security Services',
+        mvp: true,
+        requirements: [
+          {
+            id: 'CC.INT.01',
+            title: 'Integration with Certificate Services',
+            mvp: true,
+            cite: 'cc_cert_integration',
+            desc: 'The solution SHALL integrate with the nationally provided Certificate Services for digital certificate issuance, renewal, revocation, and trust validation. The solution SHALL NOT develop or embed its own certificate authority or certificate management capability.'
+          },
+          {
+            id: 'CC.INT.02',
+            title: 'Secure Communications via Certificate Services',
+            mvp: true,
+            cite: null,
+            desc: 'The solution SHALL use the national Certificate Services to enable secure communication (e.g., mutual TLS) between NEHR, NHDX, eReferral, Appointment Management, and other authorised systems.'
+          },
+          {
+            id: 'CC.INT.04',
+            title: 'Security Event & Incident Management Integration',
+            mvp: true,
+            cite: null,
+            desc: 'The solution SHALL integrate with the national Security Event and Incident Management platform to publish security logs, alerts, and incidents. Local security monitoring SHALL be limited to forwarding events to the central platform.'
+          }
+        ]
+      },
+      {
+        id: 'cc-monitoring',
+        label: 'Monitoring & Audit',
+        mvp: true,
+        requirements: [
+          {
+            id: 'CC.INT.03',
+            title: 'Application Performance Monitoring Integration',
+            mvp: true,
+            cite: 'cc_apm',
+            desc: 'The solution SHALL integrate with the centrally provided Application Performance Monitoring (APM) platform for performance, availability, and resource utilisation monitoring. The solution SHALL NOT implement a separate APM solution.'
+          },
+          {
+            id: 'CC.INT.05',
+            title: 'Central Audit Repository Integration',
+            mvp: true,
+            cite: null,
+            desc: 'The solution SHALL generate audit logs and transmit them to the centrally managed Audit Repository using approved interfaces. The solution SHALL NOT implement its own long-term audit log storage.'
+          },
+          {
+            id: 'CC.INT.06',
+            title: 'Audit Log Standardisation',
+            mvp: true,
+            cite: null,
+            desc: 'Audit events generated by the solution SHALL conform to the national audit log structure, taxonomy, and timestamping requirements.'
+          },
+          {
+            id: 'CC.INT.07',
+            title: 'Time Keeping Service Integration',
+            mvp: true,
+            cite: null,
+            desc: 'The solution SHALL integrate with the national Time Keeping Service to ensure consistent timestamping of transactions, audit events, and clinical records. Local system clocks SHALL be synchronised with the authoritative time source.'
+          }
+        ]
+      },
+      {
+        id: 'cc-data',
+        label: 'Data & Analytics Integration',
+        mvp: false,
+        requirements: [
+          {
+            id: 'CC.INT.08',
+            title: 'ETL Framework Integration',
+            mvp: false,
+            cite: null,
+            desc: 'The solution SHALL expose approved interfaces and data extracts to the centrally managed ETL framework. The solution SHALL NOT develop independent ETL pipelines for secondary use.'
+          },
+          {
+            id: 'CC.INT.09',
+            title: 'Secondary Use Data Provisioning',
+            mvp: false,
+            cite: null,
+            desc: 'The solution SHALL support data provisioning to the Digital Health Information Warehouse (DHIW/HMIS) exclusively via the national ETL framework and approved data models.'
+          },
+          {
+            id: 'CC.INT.10',
+            title: 'Separation of Operational and Analytical Workloads',
+            mvp: false,
+            cite: null,
+            desc: 'The solution SHALL ensure that operational systems (NEHR, NHDX, eReferral, Appointment) are not used directly for analytical queries and SHALL rely on the DHIW for secondary-use analytics.'
+          }
+        ]
+      },
+      {
+        id: 'cc-privacy',
+        label: 'Privacy & Governance',
+        mvp: true,
+        requirements: [
+          {
+            id: 'CC.INT.11',
+            title: 'Privacy & De-Identification Alignment',
+            mvp: true,
+            cite: null,
+            desc: 'The solution SHALL comply with national de-identification and pseudonymisation policies when providing data for secondary use and SHALL rely on centrally provided mechanisms where applicable.'
+          },
+          {
+            id: 'CC.INT.12',
+            title: 'Access Governance for Secondary Use',
+            mvp: false,
+            cite: null,
+            desc: 'The solution SHALL enforce access decisions issued by national governance processes for secondary-use data and SHALL log all data disclosures via the central audit service.'
+          }
+        ]
+      },
+      {
+        id: 'cc-compliance',
+        label: 'Compliance & Coordination',
+        mvp: true,
+        requirements: [
+          {
+            id: 'CC.INT.13',
+            title: 'No Duplication of Common Services',
+            mvp: true,
+            cite: 'cc_no_duplication',
+            desc: 'The solution SHALL NOT design, develop, procure, or operate duplicate implementations of certificate management, audit repositories, ETL pipelines, time services, or APM platforms.'
+          },
+          {
+            id: 'CC.INT.14',
+            title: 'Standards-Based Integration',
+            mvp: true,
+            cite: null,
+            desc: 'All integrations with common services SHALL use nationally approved standards, APIs, and security mechanisms as published by the platform owners.'
+          },
+          {
+            id: 'CC.INT.15',
+            title: 'Change & Dependency Coordination',
+            mvp: true,
+            cite: null,
+            desc: 'The solution SHALL coordinate changes, upgrades, and dependency management with the owners of the common services to avoid service disruption.'
           }
         ]
       }
